@@ -13,6 +13,7 @@
 		AA0A6532216D11730078ED78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0A6531216D11730078ED78 /* Assets.xcassets */; };
 		AA0A6535216D11730078ED78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0A6533216D11730078ED78 /* LaunchScreen.storyboard */; };
 		AA0A653D216D119D0078ED78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA0A653C216D119C0078ED78 /* GoogleService-Info.plist */; };
+		AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A653E216D18E50078ED78 /* ComposeViewController.swift */; };
 		C8835C0FF2A0718A6628DC71 /* Pods_newsapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA258CB593F9C6876DADA7F /* Pods_newsapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		AA0A6534216D11730078ED78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA0A6536216D11730078ED78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA0A653C216D119C0078ED78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AA0A653E216D18E50078ED78 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		E7455B8FBC0C6CE4FD4F39E6 /* Pods-newsapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newsapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newsapp/Pods-newsapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 				AA0A6533216D11730078ED78 /* LaunchScreen.storyboard */,
 				AA0A6536216D11730078ED78 /* Info.plist */,
 				AA0A653C216D119C0078ED78 /* GoogleService-Info.plist */,
+				AA0A653E216D18E50078ED78 /* ComposeViewController.swift */,
 			);
 			path = newsapp;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */,
 				AA0A652D216D11710078ED78 /* ViewController.swift in Sources */,
 				AA0A652B216D11710078ED78 /* AppDelegate.swift in Sources */,
 			);
