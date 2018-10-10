@@ -152,8 +152,9 @@
                                     <segment title="Sign In"/>
                                     <segment title="Sign Up"/>
                                 </segments>
+                                <color key="tintColor" red="0.4849071056" green="0.6590025907" blue="0.38802162029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="signInSwitchTapped:" destination="5k5-tR-9JP" eventType="valueChanged" id="puB-JF-PyF"/>
+                                    <action selector="signInSwitchTapped:" destination="5k5-tR-9JP" eventType="valueChanged" id="ivu-QV-7jz"/>
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="106" translatesAutoresizingMaskIntoConstraints="NO" id="fG7-G4-7aW">
@@ -162,7 +163,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyz-ZB-QRU">
                                         <rect key="frame" x="0.0" y="0.0" width="40.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WnH-ef-KqW">
@@ -203,13 +204,13 @@
                                     <segment title="User"/>
                                     <segment title="Publisher"/>
                                 </segments>
+                                <color key="tintColor" red="1" green="0.69038007130000001" blue="0.39211363910000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="signInSwitchTapped:" destination="5k5-tR-9JP" eventType="valueChanged" id="Wpt-XC-qcr"/>
-                                    <action selector="userSwitchTapped:" destination="5k5-tR-9JP" eventType="valueChanged" id="jaR-mh-RHE"/>
+                                    <action selector="userSwitchTapped:" destination="5k5-tR-9JP" eventType="valueChanged" id="rZr-kK-q9c"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="iX2-wl-ml2" firstAttribute="top" secondItem="c3l-0r-3r0" secondAttribute="top" constant="29" id="0AJ-OY-1Ea"/>
                             <constraint firstItem="hhb-a8-rae" firstAttribute="leading" secondItem="c3l-0r-3r0" secondAttribute="leading" constant="10" id="GbQ-BT-LlR"/>

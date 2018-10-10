@@ -19,9 +19,11 @@ class SignOnViewController: UIViewController {
     var userSwitchOn = true
     var signInSwitchOn = true
     
+    var ref:DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
 
         // Do any additional setup after loading the view.
     }
@@ -31,11 +33,13 @@ class SignOnViewController: UIViewController {
         userSwitchOn = !userSwitchOn
     }
     @IBAction func signInSwitchTapped(_ sender: Any) {
-        signInSwitchOn = ! signInSwitchOn
+        signInSwitchOn = !signInSwitchOn
     }
     
     @IBAction func finishButtonTapped(_ sender: Any) {
-        print(emailField.text)
+        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
+            print(user?.user.email)
+        }
     }
     
     /*
