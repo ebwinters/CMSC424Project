@@ -17,7 +17,6 @@ class userAuthenticatedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        print (self.userID)
         // Do any additional setup after loading the view.
     }
     

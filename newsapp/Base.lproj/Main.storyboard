@@ -363,15 +363,21 @@
                                 <state key="normal" title="Delete User">
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="deletePublisher:" destination="bss-ln-ZQA" eventType="touchUpInside" id="Ng6-tw-0hS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PHg-q3-FPf"/>
                     </view>
+                    <connections>
+                        <segue destination="5k5-tR-9JP" kind="show" identifier="deletedPublisher" id="aSC-8q-mMb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xon-MY-Ipq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1812" y="1538"/>
+            <point key="canvasLocation" x="1972" y="1416"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ElJ-Nv-7Bl">
@@ -399,6 +405,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KNc-43-07A"/>
+        <segue reference="aSC-8q-mMb"/>
     </inferredMetricsTieBreakers>
 </document>
