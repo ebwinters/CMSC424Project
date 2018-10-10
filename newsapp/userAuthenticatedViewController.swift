@@ -22,15 +22,23 @@ class userAuthenticatedViewController: UIViewController {
     
     @IBAction func deleteCurrentUser(_ sender: Any) {
         if let users = Auth.auth().currentUser {
+            ref.child("Users").child(users.uid).observeSingleEvent(of: .value) { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                //Add to archive table
+                self.ref.child("oldUsers").child(users.uid).setValue(value)
+                print (value)
+                //Remove from current user table
+                self.ref.child("Users").child(users.uid).removeValue()
+            }
             users.delete { (error) in
                 if error != nil {
                     print(error!)
                     return
                 }
+                //Delete user from auth table
                 try! Auth.auth().signOut()
                 print("User deleted")
                 self.performSegue(withIdentifier: "deletedUser", sender: self)
-                
             }
         }
     }
