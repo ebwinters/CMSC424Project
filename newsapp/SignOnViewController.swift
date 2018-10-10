@@ -18,6 +18,13 @@ class SignOnViewController: UIViewController {
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var warningLabel: UILabel!
     
+    //Toggled fields
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var addressField: UITextField!
+    
+    
     var userSwitchOn = true
     var signInSwitchOn = true
     
@@ -31,6 +38,13 @@ class SignOnViewController: UIViewController {
         self.finishButton.layer.borderWidth = 1.0
         self.finishButton.layer.borderColor = UIColor.white.cgColor
         self.finishButton.layer.cornerRadius = 3.0
+        
+        //Toggle labels and fields
+        self.nameLabel.isHidden = true
+        self.nameField.isHidden = true
+        self.addressLabel.isHidden = true
+        self.addressField.isHidden = true
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,7 +54,7 @@ class SignOnViewController: UIViewController {
         }
         else if (segue.identifier == "showPublisherAuth") {
             let destinationVC = segue.destination as! publisherAuthenticatedViewControllerViewController
-//            destinationVC.code = sender as! String
+            destinationVC.publisherID = sender as! String
         }
     }
     
@@ -50,6 +64,18 @@ class SignOnViewController: UIViewController {
     }
     @IBAction func signInSwitchTapped(_ sender: Any) {
         signInSwitchOn = !signInSwitchOn
+        if signInSwitchOn == true {
+            self.nameLabel.isHidden = true
+            self.nameField.isHidden = true
+            self.addressLabel.isHidden = true
+            self.addressField.isHidden = true
+        }
+        else {
+            self.nameLabel.isHidden = false
+            self.nameField.isHidden = false
+            self.addressLabel.isHidden = false
+            self.addressField.isHidden = false
+        }
     }
     
     @IBAction func finishButtonTapped(_ sender: Any) {
@@ -59,7 +85,13 @@ class SignOnViewController: UIViewController {
             if isValidEmail(testStr: emailField.text!) {
                 Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
                     user?.user.sendEmailVerification(completion: { (error) in
-                        //Add user to users table and tell user to check email
+                       let post = [
+                        "email": user?.user.email,
+                        "name": self.nameField.text!,
+                        "address": self.addressField.text!
+                        ]
+                        self.ref.child("Users").child((user?.user.uid)!).setValue(post)
+                        self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "Check email for verification"
                     })
                 }
@@ -75,7 +107,13 @@ class SignOnViewController: UIViewController {
             if isValidEmail(testStr: emailField.text!) {
                 Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
                     user?.user.sendEmailVerification(completion: { (error) in
-                        //Add user to publishers table and tell user to check email
+                        let post = [
+                            "email": user?.user.email,
+                            "name": self.nameField.text!,
+                            "address": self.addressField.text!
+                        ]
+                        self.ref.child("Publishers").child((user?.user.uid)!).setValue(post)
+                        self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "Check email for verification"
                     })
                 }
@@ -94,10 +132,17 @@ class SignOnViewController: UIViewController {
                         self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "You're In!"
                         //Segue to user dash /w credentials passed
-                        self.performSegue(withIdentifier: "showUserAuth", sender: user?.user.uid)
+                        self.ref.child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+                            if snapshot.hasChild((user?.user.uid)!) {
+                                self.performSegue(withIdentifier: "showUserAuth", sender: user?.user.uid)
+                            }
+                            else {
+                                self.warningLabel.textColor = UIColor.red
+                                self.warningLabel.text = "Invalid user"
+                            }
+                        })
                     }
                     else {
-                        
                         self.warningLabel.text = "Verify your email"
                     }
                 }
@@ -115,7 +160,15 @@ class SignOnViewController: UIViewController {
                         self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "You're In!"
                         //Segue to publisher dash /w credentials passed
-                        self.performSegue(withIdentifier: "showPublisherAuth", sender: self)
+                        self.ref.child("Publishers").observeSingleEvent(of: .value, with: { (snapshot) in
+                            if snapshot.hasChild((user?.user.uid)!) {
+                                self.performSegue(withIdentifier: "showPublisherAuth", sender: user?.user.uid)
+                            }
+                            else {
+                                self.warningLabel.textColor = UIColor.red
+                                self.warningLabel.text = "Invalid publisher"
+                            }
+                        })
                     }
                     else {
                         //Update label to say "verify email"

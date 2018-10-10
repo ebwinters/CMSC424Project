@@ -9,7 +9,8 @@
 import UIKit
 
 class publisherAuthenticatedViewControllerViewController: UIViewController {
-
+    var publisherID = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
