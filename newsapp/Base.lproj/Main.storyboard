@@ -192,7 +192,8 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="whM-66-MmD">
-                                <rect key="frame" x="167" y="501" width="41" height="30"/>
+                                <rect key="frame" x="157" y="501" width="61" height="28"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                 <state key="normal" title="Finish"/>
                                 <connections>
                                     <action selector="finishButtonTapped:" destination="5k5-tR-9JP" eventType="touchUpInside" id="ggt-ve-FGT"/>
@@ -209,21 +210,30 @@
                                     <action selector="userSwitchTapped:" destination="5k5-tR-9JP" eventType="valueChanged" id="rZr-kK-q9c"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXd-uV-OPM">
+                                <rect key="frame" x="187.5" y="427" width="0.0" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="iX2-wl-ml2" firstAttribute="top" secondItem="c3l-0r-3r0" secondAttribute="top" constant="29" id="0AJ-OY-1Ea"/>
+                            <constraint firstItem="whM-66-MmD" firstAttribute="top" secondItem="CXd-uV-OPM" secondAttribute="bottom" constant="53" id="Ex9-fe-tOc"/>
                             <constraint firstItem="hhb-a8-rae" firstAttribute="leading" secondItem="c3l-0r-3r0" secondAttribute="leading" constant="10" id="GbQ-BT-LlR"/>
                             <constraint firstItem="c3l-0r-3r0" firstAttribute="trailing" secondItem="hhb-a8-rae" secondAttribute="trailing" constant="10" id="JS6-Q8-Wih"/>
                             <constraint firstItem="whM-66-MmD" firstAttribute="centerX" secondItem="LmS-ZM-oIq" secondAttribute="centerX" id="MJY-U6-dVz"/>
                             <constraint firstItem="hhb-a8-rae" firstAttribute="top" secondItem="WnH-ef-KqW" secondAttribute="bottom" constant="48" id="Xfv-Jb-IKc"/>
                             <constraint firstItem="g8S-Qc-Yc5" firstAttribute="centerX" secondItem="LmS-ZM-oIq" secondAttribute="centerX" id="ZUM-sf-Ffa"/>
                             <constraint firstItem="iX2-wl-ml2" firstAttribute="centerX" secondItem="LmS-ZM-oIq" secondAttribute="centerX" id="Zhp-H4-Y2c"/>
+                            <constraint firstItem="CXd-uV-OPM" firstAttribute="top" secondItem="q6l-tW-jdH" secondAttribute="bottom" constant="74" id="cjS-da-Juv"/>
                             <constraint firstItem="c3l-0r-3r0" firstAttribute="trailing" secondItem="fG7-G4-7aW" secondAttribute="trailing" constant="10" id="eSN-dA-Lco"/>
                             <constraint firstItem="fG7-G4-7aW" firstAttribute="top" secondItem="g8S-Qc-Yc5" secondAttribute="bottom" constant="57" id="fgD-bz-y7l"/>
                             <constraint firstItem="fG7-G4-7aW" firstAttribute="leading" secondItem="c3l-0r-3r0" secondAttribute="leading" constant="10" id="qNr-yL-DeJ"/>
                             <constraint firstItem="g8S-Qc-Yc5" firstAttribute="top" secondItem="iX2-wl-ml2" secondAttribute="bottom" constant="39" id="sW2-7C-gCP"/>
                             <constraint firstItem="whM-66-MmD" firstAttribute="top" secondItem="q6l-tW-jdH" secondAttribute="bottom" constant="148" id="vqJ-fE-moJ"/>
+                            <constraint firstItem="CXd-uV-OPM" firstAttribute="centerX" secondItem="LmS-ZM-oIq" secondAttribute="centerX" id="xW5-s2-gze"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c3l-0r-3r0"/>
                     </view>
@@ -233,6 +243,7 @@
                         <outlet property="passwordField" destination="q6l-tW-jdH" id="r8K-Qe-Pfx"/>
                         <outlet property="signInSwitch" destination="g8S-Qc-Yc5" id="nwa-Q5-Tfn"/>
                         <outlet property="userPublisherSwitch" destination="iX2-wl-ml2" id="ckL-Hv-ECQ"/>
+                        <outlet property="warningLabel" destination="CXd-uV-OPM" id="uxg-L9-H52"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFK-hi-oVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
