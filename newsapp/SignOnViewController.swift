@@ -27,9 +27,21 @@ class SignOnViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
+        //Set some UI attributes
         self.finishButton.layer.borderWidth = 1.0
-        self.finishButton.layer.borderColor = UIColor.black.cgColor
+        self.finishButton.layer.borderColor = UIColor.white.cgColor
         self.finishButton.layer.cornerRadius = 3.0
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showUserAuth") {
+            let destinationVC = segue.destination as! userAuthenticatedViewController
+            destinationVC.userID = sender as! String
+        }
+        else if (segue.identifier == "showPublisherAuth") {
+            let destinationVC = segue.destination as! publisherAuthenticatedViewControllerViewController
+//            destinationVC.code = sender as! String
+        }
     }
     
     
@@ -82,6 +94,7 @@ class SignOnViewController: UIViewController {
                         self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "You're In!"
                         //Segue to user dash /w credentials passed
+                        self.performSegue(withIdentifier: "showUserAuth", sender: user?.user.uid)
                     }
                     else {
                         
@@ -102,6 +115,7 @@ class SignOnViewController: UIViewController {
                         self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "You're In!"
                         //Segue to publisher dash /w credentials passed
+                        self.performSegue(withIdentifier: "showPublisherAuth", sender: self)
                     }
                     else {
                         //Update label to say "verify email"

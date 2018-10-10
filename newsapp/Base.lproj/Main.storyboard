@@ -244,11 +244,43 @@
                         <outlet property="signInSwitch" destination="g8S-Qc-Yc5" id="nwa-Q5-Tfn"/>
                         <outlet property="userPublisherSwitch" destination="iX2-wl-ml2" id="ckL-Hv-ECQ"/>
                         <outlet property="warningLabel" destination="CXd-uV-OPM" id="uxg-L9-H52"/>
+                        <segue destination="8yV-jL-DxB" kind="show" identifier="showUserAuth" id="QCO-1r-bkE"/>
+                        <segue destination="bss-ln-ZQA" kind="show" identifier="showPublisherAuth" id="7U4-yQ-Y5i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFK-hi-oVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="728.79999999999995" y="1123.9880059970017"/>
+        </scene>
+        <!--User Authenticated View Controller-->
+        <scene sceneID="g15-rw-oIq">
+            <objects>
+                <viewController storyboardIdentifier="userAuthenticated" id="8yV-jL-DxB" customClass="userAuthenticatedViewController" customModule="newsapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s9w-Ys-KtP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="miw-Pf-39t"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dNY-H2-69B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1812" y="837"/>
+        </scene>
+        <!--Publisher Authenticated View Controller View Controller-->
+        <scene sceneID="glb-aU-Qcc">
+            <objects>
+                <viewController storyboardIdentifier="publisherAuthenticated" id="bss-ln-ZQA" customClass="publisherAuthenticatedViewControllerViewController" customModule="newsapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EQz-hZ-qZg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="PHg-q3-FPf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xon-MY-Ipq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1812" y="1538"/>
         </scene>
     </scenes>
 </document>
