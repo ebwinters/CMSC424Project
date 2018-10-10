@@ -37,8 +37,20 @@ class SignOnViewController: UIViewController {
     }
     
     @IBAction func finishButtonTapped(_ sender: Any) {
-        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
-            print(user?.user.email)
+//        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
+//            user?.user.sendEmailVerification(completion: { (error) in
+//
+//            })
+//        }
+        Auth.auth().signIn(withEmail: "ebwinters@comcast.net", password: "Chicago23") { (user, error) in
+            if user != nil {
+                if user!.user.isEmailVerified{
+                    print (user?.user.email)
+                }
+                else {
+                    print ("NO VERIFY")
+                }
+            }
         }
     }
     
