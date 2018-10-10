@@ -35,6 +35,12 @@ class ComposeViewController: UIViewController {
     
     @IBAction func cancelPost(_ sender: Any) {
         presentingViewController?.dismiss(animated: true, completion: nil)
+        //Sign user in, handle passing session details
+        Auth.auth().signIn(withEmail: "ebwinters@comcast.net", password: "ebWinters123!") { (user, error) in
+            if (user != nil) {
+                print (user?.user.uid as? String)
+            }
+        }
     }
     /*
     // MARK: - Navigation
