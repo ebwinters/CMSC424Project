@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class ComposeViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
@@ -24,6 +25,10 @@ class ComposeViewController: UIViewController {
     @IBAction func addPost(_ sender: Any) {
         //Post data to db realtime!
         ref.child("Posts").childByAutoId().setValue(textView.text)
+        //IGNORE AND MOVE: ADDED A USER TO DATABASE
+        Auth.auth().createUser(withEmail: "ebwinters@comcast.net", password: "ebWinters123!") { (user, error) in
+            print(user?.user.email)
+        }
         //Dismiss popover
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
