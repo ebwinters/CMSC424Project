@@ -24,15 +24,23 @@ class publisherAuthenticatedViewControllerViewController: UIViewController {
     
     @IBAction func deletePublisher(_ sender: Any) {
         if let users = Auth.auth().currentUser {
+            ref.child("Publishers").child(users.uid).observeSingleEvent(of: .value) { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                //Add to archive table
+                self.ref.child("oldPublishers").child(users.uid).setValue(value)
+                print (value)
+                //Remove from current user table
+                self.ref.child("Publishers").child(users.uid).removeValue()
+            }
             users.delete { (error) in
                 if error != nil {
                     print(error!)
                     return
                 }
+                //Delete user from auth table
                 try! Auth.auth().signOut()
                 print("Publisher deleted")
                 self.performSegue(withIdentifier: "deletedPublisher", sender: self)
-                
             }
         }
     }
