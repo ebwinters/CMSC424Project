@@ -12,6 +12,7 @@ import Firebase
 import FirebaseAuth
 
 class SignOnViewController: UIViewController, CLLocationManagerDelegate {
+    //Outlets for physical components
     @IBOutlet weak var userPublisherSwitch: UISegmentedControl!
     @IBOutlet weak var signInSwitch: UISegmentedControl!
     @IBOutlet weak var emailField: UITextField!
@@ -19,16 +20,17 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var warningLabel: UILabel!
     
-    //Toggled fields
+    //Outlets for toggled fields - to be displayed conditionally
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var addressField: UITextField!
     
-    
+    //Create switches to se weather signing in user/publisher or registering
     var userSwitchOn = true
     var signInSwitchOn = true
     
+    //Set up location services
     var locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
     
@@ -36,7 +38,7 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference()
+        ref = Database.database().reference()       //Add Firebase DB reference
         
         //Set some UI attributes
         self.finishButton.layer.borderWidth = 1.0
@@ -49,6 +51,7 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
         self.addressLabel.isHidden = true
         self.addressField.isHidden = true
         
+        //Location retrieval
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -58,25 +61,33 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
             }
             currentLocation = (locationManager.location?.coordinate)!
         }
-        
     }
     
+    /*
+     Function to prepare the segue to a publisher or user portal, sending respective information to either view
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showUserAuth") {
+        if (segue.identifier == "showUserAuth") {       //User signed in successfully
             let destinationVC = segue.destination as! userAuthenticatedViewController
-            destinationVC.userID = sender as! String
-            destinationVC.currentLocation = self.currentLocation
+            destinationVC.userID = sender as! String    //Send the user ID to the view controller
+            destinationVC.currentLocation = self.currentLocation    //Send the current location to the view controller
         }
-        else if (segue.identifier == "showPublisherAuth") {
+        else if (segue.identifier == "showPublisherAuth") {     //Publisher signed in successfully
             let destinationVC = segue.destination as! publisherAuthenticatedViewControllerViewController
-            destinationVC.publisherID = sender as! String
+            destinationVC.publisherID = sender as! String       //Send the publisher ID to the view controller
         }
     }
     
-    
+    /*
+     When switched between user and publisher, adjust flag to note which is programatically selected
+     */
     @IBAction func userSwitchTapped(_ sender: Any) {
         userSwitchOn = !userSwitchOn
     }
+    
+    /*
+     When switched between sign in and register, adjust flag to note which is programatically selected. If we are registering, show name and address fields
+     */
     @IBAction func signInSwitchTapped(_ sender: Any) {
         signInSwitchOn = !signInSwitchOn
         if signInSwitchOn == true {
@@ -93,11 +104,13 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    /*
+     Action outlet to handle the sign in/register process being completed. This function covers all 4 cases or registering a user/publisher or signing in a user/publisher
+     */
     @IBAction func finishButtonTapped(_ sender: Any) {
         //Case 1: Register new user
         if userSwitchOn == true && signInSwitchOn == false {
-            //Sanitize
-            if isValidEmail(testStr: emailField.text!) {
+            if isValidEmail(testStr: emailField.text!) {        //Sanitize email
                 Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
                     user?.user.sendEmailVerification(completion: { (error) in
                        let post = [
@@ -105,7 +118,7 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
                         "name": self.nameField.text!,
                         "address": self.addressField.text!
                         ]
-                        self.ref.child("Users").child((user?.user.uid)!).setValue(post)
+                        self.ref.child("Users").child((user?.user.uid)!).setValue(post)     //Add to users
                         self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "Check email for verification"
                     })
@@ -198,7 +211,9 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //Helper functions
-    //Function to verify if an email address is valid
+    /*
+     Function to verify if an email address is valid or not using Regex
+     */
     func isValidEmail(testStr:String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
