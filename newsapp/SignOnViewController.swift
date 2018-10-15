@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 import FirebaseAuth
 
-class SignOnViewController: UIViewController {
+class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var userPublisherSwitch: UISegmentedControl!
     @IBOutlet weak var signInSwitch: UISegmentedControl!
     @IBOutlet weak var emailField: UITextField!
@@ -27,6 +28,9 @@ class SignOnViewController: UIViewController {
     
     var userSwitchOn = true
     var signInSwitchOn = true
+    
+    var locationManager = CLLocationManager()
+    var currentLocation = CLLocationCoordinate2D()
     
     var ref:DatabaseReference!
     
@@ -45,12 +49,23 @@ class SignOnViewController: UIViewController {
         self.addressLabel.isHidden = true
         self.addressField.isHidden = true
         
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            if locationManager.location?.coordinate == nil {
+                locationManager.requestLocation()
+            }
+            currentLocation = (locationManager.location?.coordinate)!
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showUserAuth") {
             let destinationVC = segue.destination as! userAuthenticatedViewController
             destinationVC.userID = sender as! String
+            destinationVC.currentLocation = self.currentLocation
         }
         else if (segue.identifier == "showPublisherAuth") {
             let destinationVC = segue.destination as! publisherAuthenticatedViewControllerViewController
