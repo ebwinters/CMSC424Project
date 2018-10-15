@@ -14,6 +14,8 @@
 		AA0A6535216D11730078ED78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0A6533216D11730078ED78 /* LaunchScreen.storyboard */; };
 		AA0A653D216D119D0078ED78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA0A653C216D119C0078ED78 /* GoogleService-Info.plist */; };
 		AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A653E216D18E50078ED78 /* ComposeViewController.swift */; };
+		AA6A0E9B217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A0E99217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift */; };
+		AA6A0E9C217552A300F403D8 /* userAuthenticatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A0E9A217552A300F403D8 /* userAuthenticatedViewController.swift */; };
 		AAE5B053216E2D8D0089C886 /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */; };
 		C8835C0FF2A0718A6628DC71 /* Pods_newsapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA258CB593F9C6876DADA7F /* Pods_newsapp.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 		AA0A6536216D11730078ED78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA0A653C216D119C0078ED78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA0A653E216D18E50078ED78 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		AA6A0E99217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = publisherAuthenticatedViewControllerViewController.swift; sourceTree = "<group>"; };
+		AA6A0E9A217552A300F403D8 /* userAuthenticatedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userAuthenticatedViewController.swift; sourceTree = "<group>"; };
 		AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		E7455B8FBC0C6CE4FD4F39E6 /* Pods-newsapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newsapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newsapp/Pods-newsapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +79,8 @@
 		AA0A6529216D11710078ED78 /* newsapp */ = {
 			isa = PBXGroup;
 			children = (
+				AA6A0E99217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift */,
+				AA6A0E9A217552A300F403D8 /* userAuthenticatedViewController.swift */,
 				AA0A652A216D11710078ED78 /* AppDelegate.swift */,
 				AA0A652C216D11710078ED78 /* ViewController.swift */,
 				AA0A652E216D11710078ED78 /* Main.storyboard */,
@@ -226,6 +232,8 @@
 			files = (
 				AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */,
 				AA0A652D216D11710078ED78 /* ViewController.swift in Sources */,
+				AA6A0E9B217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift in Sources */,
+				AA6A0E9C217552A300F403D8 /* userAuthenticatedViewController.swift in Sources */,
 				AAE5B053216E2D8D0089C886 /* SignOnViewController.swift in Sources */,
 				AA0A652B216D11710078ED78 /* AppDelegate.swift in Sources */,
 			);

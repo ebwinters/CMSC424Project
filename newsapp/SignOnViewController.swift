@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import MapKit
 import Firebase
 import FirebaseAuth
 
-class SignOnViewController: UIViewController, CLLocationManagerDelegate {
+class SignOnViewController: UIViewController {
     //Outlets for physical components
     @IBOutlet weak var userPublisherSwitch: UISegmentedControl!
     @IBOutlet weak var signInSwitch: UISegmentedControl!
@@ -30,10 +29,6 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     var userSwitchOn = true
     var signInSwitchOn = true
     
-    //Set up location services
-    var locationManager = CLLocationManager()
-    var currentLocation = CLLocationCoordinate2D()
-    
     var ref:DatabaseReference!
     
     override func viewDidLoad() {
@@ -50,17 +45,6 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
         self.nameField.isHidden = true
         self.addressLabel.isHidden = true
         self.addressField.isHidden = true
-        
-        //Location retrieval
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            if locationManager.location?.coordinate == nil {
-                locationManager.requestLocation()
-            }
-            currentLocation = (locationManager.location?.coordinate)!
-        }
     }
     
     /*
@@ -70,7 +54,6 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
         if (segue.identifier == "showUserAuth") {       //User signed in successfully
             let destinationVC = segue.destination as! userAuthenticatedViewController
             destinationVC.userID = sender as! String    //Send the user ID to the view controller
-            destinationVC.currentLocation = self.currentLocation    //Send the current location to the view controller
         }
         else if (segue.identifier == "showPublisherAuth") {     //Publisher signed in successfully
             let destinationVC = segue.destination as! publisherAuthenticatedViewControllerViewController

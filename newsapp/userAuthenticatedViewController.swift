@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MapKit
 import Firebase
 import FirebaseAuth
 
@@ -20,11 +19,9 @@ import FirebaseAuth
  4. Retrieve stories near user's location and relay them to the current user based on their preferences
  */
 
-class userAuthenticatedViewController: UIViewController, CLLocationManagerDelegate {
+class userAuthenticatedViewController: UIViewController {
     var userID = ""     //Variable to ekep track of signed in user's UID
     var ref:DatabaseReference!
-    var locationManager = CLLocationManager()      //Declare location manager for possible use
-    var currentLocation = CLLocationCoordinate2D()     //Current location originally passed in from sign on controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
