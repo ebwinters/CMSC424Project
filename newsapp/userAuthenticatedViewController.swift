@@ -7,17 +7,29 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 import FirebaseAuth
 
-class userAuthenticatedViewController: UIViewController {
+class userAuthenticatedViewController: UIViewController, CLLocationManagerDelegate {
     var userID = ""
     var ref:DatabaseReference!
+    var locationManager = CLLocationManager()
+    var currentLocation = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        // Do any additional setup after loading the view.
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            if locationManager.location?.coordinate == nil {
+                locationManager.requestLocation()
+            }
+            currentLocation = (locationManager.location?.coordinate)!
+        }
     }
     
     @IBAction func deleteCurrentUser(_ sender: Any) {
