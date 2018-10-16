@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 
+/*
+ Custom category cell class
+ */
 class MainCategoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var categoryLabel: UILabel!
@@ -23,8 +26,6 @@ class MainCategoryTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     /*
@@ -32,7 +33,7 @@ class MainCategoryTableViewCell: UITableViewCell {
      */
     public func configure(category: String, isSubscribed: Bool, userID: String) {
         categoryLabel.text = category
-        categorySwitch.setOn(isSubscribed, animated: false)
+        categorySwitch.setOn(isSubscribed, animated: false)     //Set switch on if user already subscribed
         self.userID = userID
     }
     
@@ -44,8 +45,8 @@ class MainCategoryTableViewCell: UITableViewCell {
         if categorySwitch.isOn == false {
             ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                    if rest.value as! String == category {
-                        self.ref.child("Subscribes").child(self.userID).child(rest.key).removeValue { (error, ref) in
+                    if rest.value as! String == category {      //See if this is the category that the user is trying to unsubscribe to
+                        self.ref.child("Subscribes").child(self.userID).child(rest.key).removeValue { (error, ref) in       //If it is, remove the subscription for the user to the category
                             if error != nil {
                                 print("error \(error)")
                             }
@@ -59,9 +60,4 @@ class MainCategoryTableViewCell: UITableViewCell {
             self.ref.child("Subscribes").child(userID).childByAutoId().setValue(category)     //Add new category subscription for user with userID
         }
     }
-    
-    
-    
-    
-
 }
