@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 import FirebaseAuth
 
-class SignOnViewController: UIViewController {
+class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     //Outlets for physical components
     @IBOutlet weak var userPublisherSwitch: UISegmentedControl!
     @IBOutlet weak var signInSwitch: UISegmentedControl!
@@ -29,11 +30,23 @@ class SignOnViewController: UIViewController {
     var userSwitchOn = true
     var signInSwitchOn = true
     
+    //Set up location manager
+    var locationManager = CLLocationManager()
+    var currentLocation = CLLocationCoordinate2D()
+    
     var ref:DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()       //Add Firebase DB reference
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()     //Call locationDidUpdate
+        }
+        
         
         //Set some UI attributes
         self.finishButton.layer.borderWidth = 1.0
@@ -54,6 +67,7 @@ class SignOnViewController: UIViewController {
         if (segue.identifier == "showUserAuth") {       //User signed in successfully
             let destinationVC = segue.destination as! userAuthenticatedViewController
             destinationVC.userID = sender as! String    //Send the user ID to the view controller
+            destinationVC.currentLocation = currentLocation     //Send the user location to the view controller
         }
         else if (segue.identifier == "showPublisherAuth") {     //Publisher signed in successfully
             let destinationVC = segue.destination as! publisherAuthenticatedViewControllerViewController
@@ -202,6 +216,13 @@ class SignOnViewController: UIViewController {
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
+    }
+    
+    /*
+     Helper function to set current location to current user location
+     */
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     }
 
 }

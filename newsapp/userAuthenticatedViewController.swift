@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 import FirebaseAuth
 
@@ -20,12 +21,14 @@ import FirebaseAuth
  */
 
 class userAuthenticatedViewController: UIViewController {
-    var userID = ""     //Variable to ekep track of signed in user's UID
+    var userID = ""    //Variable to ekep track of signed in user's UID
+    var currentLocation = CLLocationCoordinate2D()
     var ref:DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()       //Set Firebase reference to point to plist file
+        print (currentLocation)
     }
     
     /*
