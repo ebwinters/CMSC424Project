@@ -31,6 +31,20 @@ class userAuthenticatedViewController: UIViewController {
         print (currentLocation)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showCategories") {
+            let destinationVC = segue.destination as! CategoryViewController
+            destinationVC.userID = sender as! String    //Send the user ID to the view controller
+        }
+    }
+    
+    /*
+     Action outlet to segue to category select controller with UID to save subscription data
+     */
+    @IBAction func subscriptionPreferences(_ sender: Any) {
+        performSegue(withIdentifier: "showCategories", sender: userID)
+    }
+    
     /*
      Action outlet to delete current user when pressed, and move to archived users
      */

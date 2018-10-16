@@ -115,7 +115,7 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
                         "name": self.nameField.text!,
                         "address": self.addressField.text!
                         ]
-                        self.ref.child("Users").child((user?.user.uid)!).setValue(post)     //Add to users
+                        self.ref.child("Users").child((user?.user.uid)!).setValue(post)     //Add to users under UID
                         self.warningLabel.textColor = UIColor.green
                         self.warningLabel.text = "Check email for verification"
                     })

@@ -16,6 +16,8 @@
 		AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A653E216D18E50078ED78 /* ComposeViewController.swift */; };
 		AA6A0E9B217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A0E99217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift */; };
 		AA6A0E9C217552A300F403D8 /* userAuthenticatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A0E9A217552A300F403D8 /* userAuthenticatedViewController.swift */; };
+		AA6A0E9E2175735300F403D8 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A0E9D2175735300F403D8 /* CategoryViewController.swift */; };
+		AA6A0EA021757D0100F403D8 /* MainCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6A0E9F21757D0100F403D8 /* MainCategoryTableViewCell.swift */; };
 		AAE5B053216E2D8D0089C886 /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */; };
 		C8835C0FF2A0718A6628DC71 /* Pods_newsapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA258CB593F9C6876DADA7F /* Pods_newsapp.framework */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		AA0A653E216D18E50078ED78 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		AA6A0E99217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = publisherAuthenticatedViewControllerViewController.swift; sourceTree = "<group>"; };
 		AA6A0E9A217552A300F403D8 /* userAuthenticatedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userAuthenticatedViewController.swift; sourceTree = "<group>"; };
+		AA6A0E9D2175735300F403D8 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		AA6A0E9F21757D0100F403D8 /* MainCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		E7455B8FBC0C6CE4FD4F39E6 /* Pods-newsapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newsapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newsapp/Pods-newsapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +94,8 @@
 				AA0A653C216D119C0078ED78 /* GoogleService-Info.plist */,
 				AA0A653E216D18E50078ED78 /* ComposeViewController.swift */,
 				AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */,
+				AA6A0E9D2175735300F403D8 /* CategoryViewController.swift */,
+				AA6A0E9F21757D0100F403D8 /* MainCategoryTableViewCell.swift */,
 			);
 			path = newsapp;
 			sourceTree = "<group>";
@@ -232,8 +238,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA6A0EA021757D0100F403D8 /* MainCategoryTableViewCell.swift in Sources */,
 				AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */,
 				AA0A652D216D11710078ED78 /* ViewController.swift in Sources */,
+				AA6A0E9E2175735300F403D8 /* CategoryViewController.swift in Sources */,
 				AA6A0E9B217552A300F403D8 /* publisherAuthenticatedViewControllerViewController.swift in Sources */,
 				AA6A0E9C217552A300F403D8 /* userAuthenticatedViewController.swift in Sources */,
 				AAE5B053216E2D8D0089C886 /* SignOnViewController.swift in Sources */,
