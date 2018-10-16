@@ -22,7 +22,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell") as! MainCategoryTableViewCell
-        cell.configure(category: categoryData[indexPath.row].0, isSubscribed: categoryData[indexPath.row].1)
+        cell.configure(category: categoryData[indexPath.row].0, isSubscribed: categoryData[indexPath.row].1, userID: userID)
         return cell
     }
     
