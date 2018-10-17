@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 /*
- Custom category cell class
+ Custom subcategory cell class
  */
 class SubCategoryTableViewCell: UITableViewCell {
     
@@ -31,7 +31,7 @@ class SubCategoryTableViewCell: UITableViewCell {
     }
     
     /*
-     Configure a cell with category title and a boolean to hold is user has subsribed or not, to preset the switch to on or off
+     Configure a cell with subcategory title and a boolean to hold is user has subsribed or not, to preset the switch to on or off
      */
     public func configure(category: String, isSubscribed: Bool, userID: String) {
         categoryLabel.text = category
@@ -40,7 +40,7 @@ class SubCategoryTableViewCell: UITableViewCell {
     }
     
     @IBAction func categoryToggle(_ sender: Any) {
-        let category = categoryLabel.text       //Get category for cell
+        let category = categoryLabel.text       //Get subcategory for cell
         categorySwitch.setOn(categorySwitch.isOn, animated: false)      //Flip switch value
         //Set user subscription value in Firebase
         //Case 1: User flips switch off - remove from subscriptions
@@ -48,7 +48,7 @@ class SubCategoryTableViewCell: UITableViewCell {
             ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     if rest.value as! String == category {      //See if this is the category that the user is trying to unsubscribe to
-                        self.ref.child("Subscribes").child(self.userID).child(rest.key).removeValue { (error, ref) in       //If it is, remove the subscription for the user to the category
+                        self.ref.child("Subscribes").child(self.userID).child(rest.key).removeValue { (error, ref) in       //If it is, remove the subscription for the user to the subcategory
                             if error != nil {
                                 print("error \(error)")
                             }
@@ -59,7 +59,7 @@ class SubCategoryTableViewCell: UITableViewCell {
         }
             //Case 2: User flips switch on - add to subscriptions
         else {
-            self.ref.child("Subscribes").child(userID).childByAutoId().setValue(category)     //Add new category subscription for user with userID
+            self.ref.child("Subscribes").child(userID).childByAutoId().setValue(category)     //Add new subcategory subscription for user with userID
         }
     }
 }

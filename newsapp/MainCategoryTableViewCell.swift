@@ -64,9 +64,10 @@ class MainCategoryTableViewCell: UITableViewCell {
             var subscriptions = [String]()      //List to hold all categories user subscribes to
             ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                    subscriptions.append(rest.value as! String)
+                    subscriptions.append(rest.value as! String)     //Fill subscription list
                 }
             }
+            //Check if user is subscribed to the subcategories
             ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     let temp_key = rest.key     //Get all category names
@@ -78,9 +79,8 @@ class MainCategoryTableViewCell: UITableViewCell {
                         }
                     }
                 }
-                print (subcategoryData)
                 for dataItem in subcategoryData {
-                    if dataItem.1 == false {
+                    if dataItem.1 == false {        //If user not subscribed to subcategory, subscribe them
                         self.ref.child("Subscribes").child(self.userID).childByAutoId().setValue(dataItem.0)
                     }
                 }

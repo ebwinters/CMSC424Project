@@ -33,32 +33,34 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let category = categoryData[indexPath.row].0
+        let category = categoryData[indexPath.row].0        //Category for cell
         var subscriptions = [String]()      //List to hold all categories user subscribes to
         ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                subscriptions.append(rest.value as! String)
+                subscriptions.append(rest.value as! String)     //Get all current user subscriptions
             }
         }
         //Get user data for subcategories
-        var subcategoryData = [(String, Bool)]()
+        var subcategoryData = [(String, Bool)]()        //Data to be passed into subCategoryViewController
         ref = Database.database().reference()
         ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let temp_key = rest.key     //Get all category names
-                if category == rest.key {
-                    let children = rest.value as! NSArray
+                if category == rest.key {       //If this is the one we clicked
+                    let children = rest.value as! NSArray       //Get all subcategories
                     for child in children {
                         let subscribed = subscriptions.contains(child as! String)
-                        subcategoryData.append((child as! String, subscribed))
+                        subcategoryData.append((child as! String, subscribed))      //If already subscribed, let the next view controller know
                     }
                 }
             }
-            print (subcategoryData)
             self.performSegue(withIdentifier: "showSubcategories", sender: (self.userID, subcategoryData))
         }
     }
     
+    /*
+     Go to the subcategoryViewController passing in UID and data on user subscriptions to subcategories
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showSubcategories") {       //User signed in successfully
             let destinationVC = segue.destination as!   SubcategoryViewController
