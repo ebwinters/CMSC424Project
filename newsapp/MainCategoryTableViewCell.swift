@@ -41,7 +41,7 @@ class MainCategoryTableViewCell: UITableViewCell {
         let category = categoryLabel.text       //Get category for cell
         categorySwitch.setOn(categorySwitch.isOn, animated: false)      //Flip switch value
         //Set user subscription value in Firebase
-        //Case 1: User flips switch off - remove from subscriptions
+        //Case 1: User flips switch off - remove from subscriptions, remove all subcategory subscriptions
         if categorySwitch.isOn == false {
             ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
@@ -54,8 +54,41 @@ class MainCategoryTableViewCell: UITableViewCell {
                     }
                 }
             }
+            //Get all categories usr currently subscribes to
+            var subscriptions = [String]()      //List to hold all categories user subscribes to
+            ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    subscriptions.append(rest.value as! String)     //Get all current user subscriptions
+                }
+            }
+            //Remove apporopriate subcategories from subscription list for user
+            ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
+                for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    let temp_key = rest.key     //Get all category names
+                    if category == rest.key {       //If this is the one we clicked
+//                        let children_keys = rest.key as! NSArray
+                        let children = rest.children.allObjects as! [DataSnapshot]       //Get all subcategories
+                        for child in children {
+                            let subscribed = subscriptions.contains(child.value as! String)
+                            if subscribed {
+                                self.ref.child("Subscribes").child(self.userID).observeSingleEvent(of: .value) { (snapshot) in
+                                    for rest2 in snapshot.children.allObjects as! [DataSnapshot] {
+                                        if child.value as! String == rest2.value as! String {
+                                            self.ref.child("Subscribes").child(self.userID).child(rest2.key).removeValue { (error, ref) in       //If it is, remove the subscription for the user to the category
+                                                if error != nil {
+                                                    print("error \(error)")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-        //Case 2: User flips switch on - add to subscriptions
+        //Case 2: User flips switch on - add to subscriptions, add all subcategories to subscriptions
         else {
            //Add new category subscription for user with userID
             self.ref.child("Subscribes").child(userID).childByAutoId().setValue(category)
