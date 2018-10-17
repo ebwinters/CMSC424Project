@@ -32,7 +32,40 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let category = categoryData[indexPath.row].0
+        var subscriptions = [String]()      //List to hold all categories user subscribes to
+        ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                subscriptions.append(rest.value as! String)
+            }
+        }
+        //Get user data for subcategories
+        var subcategoryData = [(String, Bool)]()
+        ref = Database.database().reference()
+        ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                let temp_key = rest.key     //Get all category names
+                if category == rest.key {
+                    let children = rest.value as! NSArray
+                    for child in children {
+                        let subscribed = subscriptions.contains(child as! String)
+                        subcategoryData.append((child as! String, subscribed))
+                    }
+                }
+            }
+            print (subcategoryData)
+            self.performSegue(withIdentifier: "showSubcategories", sender: (self.userID, subcategoryData))
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showSubcategories") {       //User signed in successfully
+            let destinationVC = segue.destination as!   SubcategoryViewController
+            destinationVC.subcategoryData = sender as! (String, [(String, Bool)])     //Send the user location to the view controller
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
