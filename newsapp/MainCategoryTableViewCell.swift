@@ -57,7 +57,34 @@ class MainCategoryTableViewCell: UITableViewCell {
         }
         //Case 2: User flips switch on - add to subscriptions
         else {
-            self.ref.child("Subscribes").child(userID).childByAutoId().setValue(category)     //Add new category subscription for user with userID
+           //Add new category subscription for user with userID
+            self.ref.child("Subscribes").child(userID).childByAutoId().setValue(category)
+            //Suscribe to all subcategories
+            var subcategoryData = [(String, Bool)]()
+            var subscriptions = [String]()      //List to hold all categories user subscribes to
+            ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    subscriptions.append(rest.value as! String)
+                }
+            }
+            ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
+                for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    let temp_key = rest.key     //Get all category names
+                    if category == rest.key {
+                        let children = rest.value as! NSArray
+                        for child in children {
+                            let subscribed = subscriptions.contains(child as! String)
+                            subcategoryData.append((child as! String, subscribed))
+                        }
+                    }
+                }
+                print (subcategoryData)
+                for dataItem in subcategoryData {
+                    if dataItem.1 == false {
+                        self.ref.child("Subscribes").child(self.userID).childByAutoId().setValue(dataItem.0)
+                    }
+                }
+            }
         }
     }
 }
