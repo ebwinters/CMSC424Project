@@ -590,9 +590,12 @@
                     </view>
                     <connections>
                         <outlet property="categoryPicker" destination="piB-rr-8Zo" id="5Je-2e-g0P"/>
+                        <outlet property="categoryTextField" destination="zZT-er-ewi" id="mRx-fT-2sF"/>
                         <outlet property="datePicker" destination="d4H-Zh-nSU" id="M5K-Np-88v"/>
                         <outlet property="mapView" destination="Nlu-eH-d1u" id="ula-4m-7FY"/>
+                        <outlet property="rangeTextField" destination="xiP-Wx-ziN" id="6lP-ev-Pyc"/>
                         <outlet property="subcategoryPicker" destination="9lH-pH-HeV" id="AeR-9r-8Su"/>
+                        <outlet property="subcategoryTextField" destination="UnW-gr-lmM" id="vBa-OF-xhN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bo6-HQ-ddP" userLabel="First Responder" sceneMemberID="firstResponder"/>

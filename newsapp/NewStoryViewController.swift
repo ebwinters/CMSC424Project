@@ -85,6 +85,9 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @IBOutlet weak var categoryPicker: UIPickerView!
     @IBOutlet weak var subcategoryPicker: UIPickerView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var categoryTextField: UITextField!
+    @IBOutlet weak var subcategoryTextField: UITextField!
+    @IBOutlet weak var rangeTextField: UITextField!
     
     var categories = ["None selected"]
     var subcategories = [String]()
@@ -110,6 +113,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
+        rangeTextField.keyboardType = UIKeyboardType.numberPad      //Range only integers in miles
+        
         
         self.categoryPicker.delegate = self
         self.categoryPicker.dataSource = self
