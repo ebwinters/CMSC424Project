@@ -9,16 +9,72 @@
 import UIKit
 import MapKit
 
-class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    /*
+     CategoryPicker functions
+     */
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == categoryPicker {
+            return categories.count
+        }
+        else {
+            return subcategories.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == categoryPicker {
+            return categories[row]
+        }
+        else {
+            return subcategories[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == categoryPicker {
+            print (categories[row])
+            publishingCategory = categories[row]
+            //RELOAD SUBCATEGORIES TO MATCH
+            if publishingCategory == "TWO" {
+                subcategories = ["DO", "RE"]
+                subcategoryPicker.reloadAllComponents()
+            }
+        }
+        else {
+            publishingSubcategory = subcategories[row]
+        }
+    }
+    
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var categoryPicker: UIPickerView!
+    @IBOutlet weak var subcategoryPicker: UIPickerView!
+    var categories = ["ONE", "TWO", "THREE"]
+    var subcategories = [String]()
+    
+    var publishingCenterCoordinate = CLLocationCoordinate2D()
+    var publishingCategory = ""
+    var publishingSubcategory = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //FILL CATEGORIES - fill subcategories after category selected using reloadComponent
+        
         mapView.delegate = self
         centerMapOnLocation()       //Center map on College Park
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
+        
+        self.categoryPicker.delegate = self
+        self.categoryPicker.dataSource = self
+        self.subcategoryPicker.delegate = self
+        self.subcategoryPicker.dataSource = self
     }
     
     /*
@@ -36,7 +92,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
         
         // Add annotation:
-        print ("HI")
-        print (coordinate)
+        print ("publishing center: \(coordinate)")
+        publishingCenterCoordinate = coordinate
     }
 }
