@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -29,41 +30,55 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == categoryPicker {
+            publishingCategory = categories[0]      //Set to top item
             return categories[row]
         }
         else {
+            if subcategories.count > 0 {
+                publishingSubcategory = subcategories[0]    //Set to top item
+            }
+            print (publishingSubcategory)
             return subcategories[row]
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == categoryPicker {
-            print (categories[row])
-            publishingCategory = categories[row]
+            publishingCategory = categories[row]        //Set the publishing category to whatever publisher selects
             //RELOAD SUBCATEGORIES TO MATCH
-            if publishingCategory == "TWO" {
-                subcategories = ["DO", "RE"]
-                subcategoryPicker.reloadAllComponents()
+            subcategories = [String]()      //Reset this and reload correct
+            ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
+                for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    if self.publishingCategory == rest.key {       //If this is the one we clicked
+                        let children = rest.children.allObjects as! [DataSnapshot]       //Get all subcategories for category we clicked switch for
+                        for child in children {
+                            self.subcategories.append(child.value as! String)
+                        }
+                    }
+                }
+                self.subcategoryPicker.reloadAllComponents()        //Load all subcategories for currently selected category
             }
         }
         else {
-            publishingSubcategory = subcategories[row]
+            publishingSubcategory = subcategories[row]      //Set publishing subcategory to the currently selected one, if they want
         }
     }
     
+    var ref = Database.database().reference()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var categoryPicker: UIPickerView!
     @IBOutlet weak var subcategoryPicker: UIPickerView!
-    var categories = ["ONE", "TWO", "THREE"]
+    //TODO: MAKE THIS NOT STATIC
+    var categories = ["Politics", "Sports"]
     var subcategories = [String]()
     
-    var publishingCenterCoordinate = CLLocationCoordinate2D()
-    var publishingCategory = ""
-    var publishingSubcategory = ""
+    var publishingCenterCoordinate = CLLocationCoordinate2D()       //Center for publisher's story
+    var publishingCategory = ""     //Category for publisher's story
+    var publishingSubcategory = ""  //Subcategory for publisher's story
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //FILL CATEGORIES - fill subcategories after category selected using reloadComponent
+        //TODO: FILL CATEGORIES - fill subcategories after category selected using reloadComponent
         
         mapView.delegate = self
         centerMapOnLocation()       //Center map on College Park
@@ -87,11 +102,13 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    /*
+     Handle map tap and update center location to wherever publisher clicks on map using a gestureRecognizer
+     */
     @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer) {
         let location = gestureReconizer.location(in: mapView)
         let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
-        
-        // Add annotation:
+
         print ("publishing center: \(coordinate)")
         publishingCenterCoordinate = coordinate
     }

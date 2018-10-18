@@ -64,7 +64,6 @@ class MainCategoryTableViewCell: UITableViewCell {
             //Remove apporopriate subcategories from subscription list for user
             ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                    let temp_key = rest.key     //Get all category names
                     if category == rest.key {       //If this is the one we clicked
                         let children = rest.children.allObjects as! [DataSnapshot]       //Get all subcategories for category we clicked switch for
                         for child in children {
