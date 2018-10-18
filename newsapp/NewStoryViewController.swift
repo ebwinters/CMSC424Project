@@ -13,6 +13,21 @@ import Firebase
 class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     /*
+     Create a pin to show publisher where their center is on map
+     */
+    class MapPin : NSObject, MKAnnotation {
+        var coordinate: CLLocationCoordinate2D
+        var title: String?
+        var subtitle: String?
+        
+        init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
+            self.coordinate = coordinate
+            self.title = title
+            self.subtitle = subtitle
+        }
+    }
+    
+    /*
      CategoryPicker functions
      */
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -103,7 +118,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
      Function to center map on College Park
      */
     func centerMapOnLocation() {
-        let regionRadius: CLLocationDistance = 1500
+        let regionRadius: CLLocationDistance = 2000
         let coordinate = CLLocationCoordinate2D(latitude: 38.989697, longitude: -76.937759)
         let coordinateRegion = MKCoordinateRegion(center: coordinate,latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
@@ -118,5 +133,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
 
         print ("publishing center: \(coordinate)")
         publishingCenterCoordinate = coordinate
+        mapView.removeAnnotations(self.mapView.annotations)
+        mapView.addAnnotation(MapPin(coordinate: coordinate, title: "Center Location", subtitle: ""))   //Plot on map
     }
 }
