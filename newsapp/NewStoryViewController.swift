@@ -54,6 +54,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                         for child in children {
                             self.subcategories.append(child.value as! String)
                         }
+                        self.subcategories.append("None")
                     }
                 }
                 self.subcategoryPicker.reloadAllComponents()        //Load all subcategories for currently selected category
@@ -69,7 +70,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @IBOutlet weak var categoryPicker: UIPickerView!
     @IBOutlet weak var subcategoryPicker: UIPickerView!
     //TODO: MAKE THIS NOT STATIC
-    var categories = ["Politics", "Sports"]
+    var categories = ["None selected"]
     var subcategories = [String]()
     
     var publishingCenterCoordinate = CLLocationCoordinate2D()       //Center for publisher's story
@@ -79,6 +80,12 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: FILL CATEGORIES - fill subcategories after category selected using reloadComponent
+        ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                self.categories.append(rest.key)
+            }
+            self.categoryPicker.reloadAllComponents()
+        }
         
         mapView.delegate = self
         centerMapOnLocation()       //Center map on College Park
