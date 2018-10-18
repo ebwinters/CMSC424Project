@@ -115,7 +115,6 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
         rangeTextField.keyboardType = UIKeyboardType.numberPad      //Range only integers in miles
         
-        
         self.categoryPicker.delegate = self
         self.categoryPicker.dataSource = self
         self.subcategoryPicker.delegate = self
