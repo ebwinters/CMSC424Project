@@ -21,6 +21,7 @@
 		AAE5B053216E2D8D0089C886 /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */; };
 		AAED15AF2176C8B40092BACD /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED15AE2176C8B40092BACD /* SubcategoryViewController.swift */; };
 		AAED15B12176CF9C0092BACD /* SubCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED15B02176CF9C0092BACD /* SubCategoryTableViewCell.swift */; };
+		AAED15B32178E0D30092BACD /* NewStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED15B22178E0D30092BACD /* NewStoryViewController.swift */; };
 		C8835C0FF2A0718A6628DC71 /* Pods_newsapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA258CB593F9C6876DADA7F /* Pods_newsapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		AAE5B052216E2D8D0089C886 /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		AAED15AE2176C8B40092BACD /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
 		AAED15B02176CF9C0092BACD /* SubCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		AAED15B22178E0D30092BACD /* NewStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoryViewController.swift; sourceTree = "<group>"; };
 		E7455B8FBC0C6CE4FD4F39E6 /* Pods-newsapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newsapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newsapp/Pods-newsapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				AAED15AE2176C8B40092BACD /* SubcategoryViewController.swift */,
 				AA6A0E9F21757D0100F403D8 /* MainCategoryTableViewCell.swift */,
 				AAED15B02176CF9C0092BACD /* SubCategoryTableViewCell.swift */,
+				AAED15B22178E0D30092BACD /* NewStoryViewController.swift */,
 			);
 			path = newsapp;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA6A0EA021757D0100F403D8 /* MainCategoryTableViewCell.swift in Sources */,
+				AAED15B32178E0D30092BACD /* NewStoryViewController.swift in Sources */,
 				AA0A653F216D18E50078ED78 /* ComposeViewController.swift in Sources */,
 				AAED15B12176CF9C0092BACD /* SubCategoryTableViewCell.swift in Sources */,
 				AA0A652D216D11710078ED78 /* ViewController.swift in Sources */,
