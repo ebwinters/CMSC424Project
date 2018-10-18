@@ -84,29 +84,32 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var categoryPicker: UIPickerView!
     @IBOutlet weak var subcategoryPicker: UIPickerView!
-    //TODO: MAKE THIS NOT STATIC
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
     var categories = ["None selected"]
     var subcategories = [String]()
     
+    var publisherID = ""
     var publishingCenterCoordinate = CLLocationCoordinate2D()       //Center for publisher's story
     var publishingCategory = ""     //Category for publisher's story
     var publishingSubcategory = ""  //Subcategory for publisher's story
+    var dateAvailable = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: FILL CATEGORIES - fill subcategories after category selected using reloadComponent
+        //Fill categories - fill subcategories after category selected using reloadComponent
         ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 self.categories.append(rest.key)
             }
             self.categoryPicker.reloadAllComponents()
         }
-        
         mapView.delegate = self
         centerMapOnLocation()       //Center map on College Park
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
         
         self.categoryPicker.delegate = self
         self.categoryPicker.dataSource = self
@@ -135,5 +138,12 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         publishingCenterCoordinate = coordinate
         mapView.removeAnnotations(self.mapView.annotations)
         mapView.addAnnotation(MapPin(coordinate: coordinate, title: "Center Location", subtitle: ""))   //Plot on map
+    }
+    
+    @objc func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateAvailable = dateFormatter.string(from: sender.date)
     }
 }

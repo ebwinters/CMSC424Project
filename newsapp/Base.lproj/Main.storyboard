@@ -484,7 +484,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Publish a Story"/>
                                 <connections>
-                                    <segue destination="NBm-fl-ZDx" kind="show" id="sTO-I0-QQZ"/>
+                                    <action selector="showPublishStory:" destination="bss-ln-ZQA" eventType="touchUpInside" id="a9a-4G-yet"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcr-sy-s8K">
@@ -503,6 +503,7 @@
                     </view>
                     <connections>
                         <segue destination="5k5-tR-9JP" kind="show" identifier="deletedPublisher" id="aSC-8q-mMb"/>
+                        <segue destination="NBm-fl-ZDx" kind="show" identifier="publishStory" id="jAs-7F-tdH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xon-MY-Ipq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -589,6 +590,7 @@
                     </view>
                     <connections>
                         <outlet property="categoryPicker" destination="piB-rr-8Zo" id="5Je-2e-g0P"/>
+                        <outlet property="datePicker" destination="d4H-Zh-nSU" id="M5K-Np-88v"/>
                         <outlet property="mapView" destination="Nlu-eH-d1u" id="ula-4m-7FY"/>
                         <outlet property="subcategoryPicker" destination="9lH-pH-HeV" id="AeR-9r-8Su"/>
                     </connections>
@@ -599,6 +601,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KNc-43-07A"/>
+        <segue reference="aSC-8q-mMb"/>
     </inferredMetricsTieBreakers>
 </document>

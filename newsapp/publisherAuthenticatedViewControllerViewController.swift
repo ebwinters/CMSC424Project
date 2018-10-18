@@ -21,6 +21,17 @@ class publisherAuthenticatedViewControllerViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "publishStory" {
+            let destinationVC = segue.destination as! NewStoryViewController
+            destinationVC.publisherID = sender as! String    //Send the user ID to the view controller
+        }
+    }
+    
+    
+    @IBAction func showPublishStory(_ sender: Any) {
+        performSegue(withIdentifier: "publishStory", sender: publisherID)
+    }
     
     @IBAction func deletePublisher(_ sender: Any) {
         if let users = Auth.auth().currentUser {
