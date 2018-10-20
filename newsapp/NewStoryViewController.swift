@@ -96,7 +96,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     var subcategories = [String]()
     
     var publisherID = ""
-    var publishingCenterCoordinate = CLLocationCoordinate2D()       //Center for publisher's story
+    var publishingCenterCoordinate = ("", "")    //Center for publisher's story
     var publishingCategory = ""     //Category for publisher's story
     var publishingSubcategory = ""  //Subcategory for publisher's story
     var dateAvailable = ""
@@ -139,7 +139,22 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         }
         message = messageField.text!
         range =  Int(rangeTextField.text!)!
-        print (message, publishingCategory, publishingSubcategory, dateAvailable, publishingCenterCoordinate)
+        //ADD NEW CATEGORIES
+        //MAKE NEW NEWS STORY
+        //MAKE NEW PUBLISHES ENTRY
+        let center = [
+            "latitude": publishingCenterCoordinate.0,
+            "longitude": publishingCenterCoordinate.1
+        ]
+        let post = [
+            "category": publishingCategory,
+            "subcategory": publishingSubcategory,
+            "message": message,
+            "end": dateAvailable,
+            "center": center,
+            "range": range
+            ] as [String : Any]
+        self.ref.child("News").childByAutoId().setValue(post)     //Add to users under UID
     }
     
     
@@ -161,7 +176,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
 
         print ("publishing center: \(coordinate)")
-        publishingCenterCoordinate = coordinate
+        publishingCenterCoordinate = (String(format:"%f", coordinate.latitude), String(format:"%f", coordinate.longitude))
         mapView.removeAnnotations(self.mapView.annotations)
         mapView.addAnnotation(MapPin(coordinate: coordinate, title: "Center Location", subtitle: ""))   //Plot on map
     }
@@ -171,8 +186,5 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
         dateAvailable = dateFormatter.string(from: sender.date)
-        //ADD NEW CATEGORIES
-        //MAKE NEW NEWS STORY
-        //MAKE NEW PUBLISHES ENTRY
     }
 }
