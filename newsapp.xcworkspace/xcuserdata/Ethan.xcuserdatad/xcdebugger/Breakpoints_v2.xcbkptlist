@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.859919"
+            timestampString = "561740012.990857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.8600219"
+            timestampString = "561740012.990947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.860087"
+            timestampString = "561740012.990997"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.860204"
+            timestampString = "561740012.991091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.860266"
+            timestampString = "561740012.991136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.860338"
+            timestampString = "561740012.991179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.8604209"
+            timestampString = "561740012.991221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.860494"
+            timestampString = "561740012.991263"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "74"
@@ -218,13 +218,91 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/MainCategoryTableViewCell.swift"
-            timestampString = "561597834.860552"
+            timestampString = "561740012.991305"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
             landmarkName = "categoryToggle(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "newsapp/NewStoryViewController.swift"
+            timestampString = "561740012.9913599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "NewStoryViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "newsapp.NewStoryViewController.subcategoryTextField.getter : weak Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "newsapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ethan/Desktop/CMSC424/CMSC424Project/newsapp/NewStoryViewController.swift"
+                  timestampString = "561739461.487276"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "newsapp.NewStoryViewController.subcategoryTextField.setter : weak Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "newsapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ethan/Desktop/CMSC424/CMSC424Project/newsapp/NewStoryViewController.swift"
+                  timestampString = "561739461.536135"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "newsapp.NewStoryViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; newsapp.NewStoryViewController"
+                  moduleName = "newsapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ethan/Desktop/CMSC424/CMSC424Project/newsapp/NewStoryViewController.swift"
+                  timestampString = "561739461.53846"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "774">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "newsapp.NewStoryViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;newsapp.NewStoryViewController&gt;"
+                  moduleName = "newsapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ethan/Desktop/CMSC424/CMSC424Project/newsapp/NewStoryViewController.swift"
+                  timestampString = "561739461.540362"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "743">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -60,6 +60,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == categoryPicker {
             publishingCategory = categories[row]        //Set the publishing category to whatever publisher selects
+            print (publishingCategory)
             //RELOAD SUBCATEGORIES TO MATCH
             subcategories = [String]()      //Reset this and reload correct
             ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
@@ -88,6 +89,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var subcategoryTextField: UITextField!
     @IBOutlet weak var rangeTextField: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var messageField: UITextView!
     
     var categories = ["None selected"]
     var subcategories = [String]()
@@ -97,6 +100,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     var publishingCategory = ""     //Category for publisher's story
     var publishingSubcategory = ""  //Subcategory for publisher's story
     var dateAvailable = ""
+    var range = 0
+    var message = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +125,23 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         self.subcategoryPicker.delegate = self
         self.subcategoryPicker.dataSource = self
     }
+    
+    @IBAction func submitStory(_ sender: Any) {
+        if categoryTextField.text! != "" {
+            publishingCategory = categoryTextField.text!
+        }
+        if subcategoryTextField.text! != "" {
+            publishingSubcategory = subcategoryTextField.text!
+        }
+        if publishingCategory == "None selected" {
+            publishingCategory = categoryTextField.text!
+            publishingSubcategory = subcategoryTextField.text!
+        }
+        message = messageField.text!
+        range =  Int(rangeTextField.text!)!
+        print (message, publishingCategory, publishingSubcategory, dateAvailable, publishingCenterCoordinate)
+    }
+    
     
     /*
      Function to center map on College Park
@@ -149,5 +171,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
         dateAvailable = dateFormatter.string(from: sender.date)
+        //ADD NEW CATEGORIES
+        //MAKE NEW NEWS STORY
+        //MAKE NEW PUBLISHES ENTRY
     }
 }

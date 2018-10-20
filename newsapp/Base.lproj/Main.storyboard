@@ -518,7 +518,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Type message here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vx7-Tl-hOr">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Edit Message" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vx7-Tl-hOr">
                                 <rect key="frame" x="67" y="53" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -569,6 +569,9 @@
                                 <rect key="frame" x="163" y="617" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitStory:" destination="NBm-fl-ZDx" eventType="touchUpInside" id="4CA-dZ-xNW"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Range " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-yl-F0m">
                                 <rect key="frame" x="306" y="496" width="56" height="75"/>
@@ -593,9 +596,11 @@
                         <outlet property="categoryTextField" destination="zZT-er-ewi" id="mRx-fT-2sF"/>
                         <outlet property="datePicker" destination="d4H-Zh-nSU" id="M5K-Np-88v"/>
                         <outlet property="mapView" destination="Nlu-eH-d1u" id="ula-4m-7FY"/>
+                        <outlet property="messageField" destination="vx7-Tl-hOr" id="udc-Wa-06o"/>
                         <outlet property="rangeTextField" destination="xiP-Wx-ziN" id="6lP-ev-Pyc"/>
                         <outlet property="subcategoryPicker" destination="9lH-pH-HeV" id="AeR-9r-8Su"/>
                         <outlet property="subcategoryTextField" destination="UnW-gr-lmM" id="vBa-OF-xhN"/>
+                        <outlet property="submitButton" destination="SrZ-pC-gYX" id="Beg-JH-2Oj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bo6-HQ-ddP" userLabel="First Responder" sceneMemberID="firstResponder"/>
