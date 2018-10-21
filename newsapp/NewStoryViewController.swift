@@ -140,8 +140,34 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         message = messageField.text!
         range =  Int(rangeTextField.text!)!
         //ADD NEW CATEGORIES
+            //Get all categories
+            //Check if new one is in old ones
+            //Insert subcat into existing cat
         //MAKE NEW NEWS STORY
         //MAKE NEW PUBLISHES ENTRY
+        if categories.contains(publishingCategory) == false {
+            self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue("None")     //Add new subcategory subscription for user with userID
+        }
+        if categories.contains(publishingCategory) == true {
+            //Get subcategories self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue("None")     //Add new subcategory subscription for user with userID
+            var innerSubcategories = [String]()
+            ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
+                for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    if self.publishingCategory == rest.key {       //If this is the one we clicked
+                        let children = rest.value as! NSDictionary       //Get all subcategories
+                        for child in children {
+                            if child.value as! String != "None" {
+                                innerSubcategories.append(child.value as! String)
+                            }
+                        }
+                    }
+                }
+            }
+            if innerSubcategories.contains(publishingSubcategory) == false {
+                self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue(publishingSubcategory)     //Add new subcategory under category
+            }
+        }
+        
         let center = [
             "latitude": publishingCenterCoordinate.0,
             "longitude": publishingCenterCoordinate.1
@@ -154,7 +180,9 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             "center": center,
             "range": range
             ] as [String : Any]
-        self.ref.child("News").childByAutoId().setValue(post)     //Add to users under UID
+        let postRef = self.ref.child("News").childByAutoId()
+        postRef.setValue(post)     //Add to users under UID
+        print (postRef.key)
     }
     
     

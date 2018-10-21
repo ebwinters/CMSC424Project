@@ -47,10 +47,12 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let temp_key = rest.key     //Get all category names
                 if category == rest.key {       //If this is the one we clicked
-                    let children = rest.value as! NSArray       //Get all subcategories
+                    let children = rest.value as! NSDictionary       //Get all subcategories
                     for child in children {
-                        let subscribed = subscriptions.contains(child as! String)
-                        subcategoryData.append((child as! String, subscribed))      //If already subscribed, let the next view controller know
+                        if child.value as! String != "None" {
+                            let subscribed = subscriptions.contains(child.value as! String)
+                            subcategoryData.append((child.value as! String, subscribed))      //If already subscribed, let the next view controller know
+                        }
                     }
                 }
             }

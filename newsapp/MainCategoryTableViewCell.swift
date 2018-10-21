@@ -97,15 +97,15 @@ class MainCategoryTableViewCell: UITableViewCell {
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     let temp_key = rest.key     //Get all category names
                     if category == rest.key {
-                        let children = rest.value as! NSArray
+                        let children = rest.value as! NSDictionary
                         for child in children {
-                            let subscribed = subscriptions.contains(child as! String)
-                            subcategoryData.append((child as! String, subscribed))
+                            let subscribed = subscriptions.contains(child.value as! String)
+                            subcategoryData.append((child.value as! String, subscribed))
                         }
                     }
                 }
                 for dataItem in subcategoryData {
-                    if dataItem.1 == false {        //If user not subscribed to subcategory, subscribe them
+                    if dataItem.1 == false && dataItem.0 != "None" {        //If user not subscribed to subcategory, subscribe them
                         self.ref.child("Subscribes").child(self.userID).childByAutoId().setValue(dataItem.0)
                     }
                 }
