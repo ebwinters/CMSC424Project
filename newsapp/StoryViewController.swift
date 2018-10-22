@@ -22,10 +22,14 @@ class StoryViewController: UIViewController {
         print (userID)
         print (currentLocation)
         print (subscriptions)
-
-        // Do any additional setup after loading the view.
+        //For each entry in stories
+            //Get lat long make center
+            //Convert range to miles
+            //MKCoordinateRegion(center: <#T##CLLocationCoordinate2D#>, latitudinalMeters: <#T##CLLocationDistance#>, longitudinalMeters: <#T##CLLocationDistance#>)
+            //Check if user location in region
+                //Check is category or subcategory in subscriptions
+                    //Make cell with story
     }
-    
 
     /*
     // MARK: - Navigation
