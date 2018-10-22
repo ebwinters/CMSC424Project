@@ -26,10 +26,10 @@ class userAuthenticatedViewController: UIViewController {
         var center: CLLocationCoordinate2D
         var category: String
         var subcategory: String
-        var range: Int
+        var range: Double
         
         
-        init(message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Int) {
+        init(message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double) {
             self.message = message
             self.center = center
             self.category = category
@@ -53,14 +53,6 @@ class userAuthenticatedViewController: UIViewController {
                 self.subscriptions.append(rest.value as! String)
             }
         }
-        //FILL VALID STORIES
-        //For each entry in stories
-        //Get lat long make center
-        //Convert range to meters
-        //MKCoordinateRegion(center: <#T##CLLocationCoordinate2D#>, latitudinalMeters: <#T##CLLocationDistance#>, longitudinalMeters: <#T##CLLocationDistance#>)
-        //Check if user location in region
-        //Check is category or subcategory in subscriptions
-        //Make cell with story
         ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let entry = rest.value as! NSDictionary
@@ -71,7 +63,9 @@ class userAuthenticatedViewController: UIViewController {
                 let rangeMeters = rangeMiles * 1609.344
                 let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
                 if self.isInRegion(region: region, coordinate: self.currentLocation) {
-                    print ("YES")
+                    if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
+                        self.valid.append(Story(message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
+                    }
                 }
             }
         }
@@ -87,7 +81,7 @@ class userAuthenticatedViewController: UIViewController {
             destinationVC.userID = sender as! String    //Send the user ID to the view controller
             destinationVC.currentLocation = currentLocation
             destinationVC.subscriptions = self.subscriptions
-            
+            destinationVC.validStories = self.valid
         }
     }
     

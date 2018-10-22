@@ -11,6 +11,7 @@ import MapKit
 import Firebase
 
 class StoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return validStories.count
     }
@@ -24,7 +25,7 @@ class StoryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var userID = ""
     var subscriptions = [String]()   //Passed in from previous controller, a list of all subscriptions to categories/subcategories that the current user has
     var currentLocation = CLLocationCoordinate2D()
-    var validStories = NSDictionary()
+    var validStories = [userAuthenticatedViewController.Story]()
     var ref = Database.database().reference()
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,23 +40,8 @@ class StoryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print (userID)
         print (currentLocation)
         print (subscriptions)
-        //For each entry in stories
-            //Get lat long make center
-            //Convert range to miles
-            //MKCoordinateRegion(center: <#T##CLLocationCoordinate2D#>, latitudinalMeters: <#T##CLLocationDistance#>, longitudinalMeters: <#T##CLLocationDistance#>)
-            //Check if user location in region
-                //Check is category or subcategory in subscriptions
-                    //Make cell with story
+        for item in validStories {
+            print (item)
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
