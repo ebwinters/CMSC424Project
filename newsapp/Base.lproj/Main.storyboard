@@ -318,6 +318,9 @@
                                 <rect key="frame" x="149" y="400" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Get Stories"/>
+                                <connections>
+                                    <action selector="getStories:" destination="8yV-jL-DxB" eventType="touchUpInside" id="xAy-kt-9fe"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4k-Nw-6QJ">
                                 <rect key="frame" x="147" y="617" width="81" height="30"/>
@@ -336,6 +339,7 @@
                     <connections>
                         <segue destination="5k5-tR-9JP" kind="show" identifier="deletedUser" id="KNc-43-07A"/>
                         <segue destination="ppS-0T-Z96" kind="show" identifier="showCategories" id="LOW-27-A9H"/>
+                        <segue destination="ayC-AT-6g3" kind="show" identifier="showStories" id="wdy-PY-4t9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNY-H2-69B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,6 +474,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lld-vU-s9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4661.6000000000004" y="780.35982008995506"/>
+        </scene>
+        <!--Story View Controller-->
+        <scene sceneID="3j8-y7-YkZ">
+            <objects>
+                <viewController id="ayC-AT-6g3" customClass="StoryViewController" customModule="newsapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hXw-3m-0BE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qS9-8q-C9F"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FfS-Oh-hen" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4536" y="1504"/>
         </scene>
         <!--Publisher Authenticated View Controller View Controller-->
         <scene sceneID="glb-aU-Qcc">
@@ -611,6 +630,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="JGU-P7-dsG"/>
-        <segue reference="aSC-8q-mMb"/>
+        <segue reference="KNc-43-07A"/>
     </inferredMetricsTieBreakers>
 </document>

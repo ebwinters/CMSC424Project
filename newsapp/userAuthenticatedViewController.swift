@@ -24,17 +24,30 @@ class userAuthenticatedViewController: UIViewController {
     var userID = ""    //Variable to ekep track of signed in user's UID
     var currentLocation = CLLocationCoordinate2D()
     var ref:DatabaseReference!
+    var subscriptions = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()       //Set Firebase reference to point to plist file
-        print (currentLocation)
+        
+        ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                self.subscriptions.append(rest.value as! String)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showCategories") {
             let destinationVC = segue.destination as! CategoryViewController
             destinationVC.userID = sender as! String    //Send the user ID to the view controller
+        }
+        if (segue.identifier == "showStories") {
+            let destinationVC = segue.destination as! StoryViewController
+            destinationVC.userID = sender as! String    //Send the user ID to the view controller
+            destinationVC.currentLocation = currentLocation
+            destinationVC.subscriptions = self.subscriptions
+            
         }
     }
     
@@ -44,6 +57,11 @@ class userAuthenticatedViewController: UIViewController {
     @IBAction func subscriptionPreferences(_ sender: Any) {
         performSegue(withIdentifier: "showCategories", sender: userID)
     }
+    
+    @IBAction func getStories(_ sender: Any) {
+        performSegue(withIdentifier: "showStories", sender: userID)
+    }
+    
     
     /*
      Action outlet to delete current user when pressed, and move to archived users
