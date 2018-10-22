@@ -147,6 +147,10 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         //MAKE NEW PUBLISHES ENTRY
         if categories.contains(publishingCategory) == false {
             self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue("None")     //Add new subcategory subscription for user with userID
+            
+            if publishingSubcategory != "" {
+                self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue(publishingSubcategory)
+            }
         }
         if categories.contains(publishingCategory) == true {
             //Get subcategories self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue("None")     //Add new subcategory subscription for user with userID
@@ -163,7 +167,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                     }
                 }
             }
-            if innerSubcategories.contains(publishingSubcategory) == false {
+            if innerSubcategories.contains(publishingSubcategory) == false && publishingSubcategory != "" {
                 self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue(publishingSubcategory)     //Add new subcategory under category
             }
         }
