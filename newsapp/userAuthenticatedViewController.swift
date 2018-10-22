@@ -21,10 +21,28 @@ import FirebaseAuth
  */
 
 class userAuthenticatedViewController: UIViewController {
+    class Story : NSObject {
+        var message: String
+        var center: CLLocationCoordinate2D
+        var category: String
+        var subcategory: String
+        var range: Int
+        
+        
+        init(message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Int) {
+            self.message = message
+            self.center = center
+            self.category = category
+            self.subcategory = subcategory
+            self.range = range
+        }
+    }
+    
     var userID = ""    //Variable to ekep track of signed in user's UID
     var currentLocation = CLLocationCoordinate2D()
     var ref:DatabaseReference!
     var subscriptions = [String]()
+    var valid = [Story]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +51,28 @@ class userAuthenticatedViewController: UIViewController {
         ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 self.subscriptions.append(rest.value as! String)
+            }
+        }
+        //FILL VALID STORIES
+        //For each entry in stories
+        //Get lat long make center
+        //Convert range to meters
+        //MKCoordinateRegion(center: <#T##CLLocationCoordinate2D#>, latitudinalMeters: <#T##CLLocationDistance#>, longitudinalMeters: <#T##CLLocationDistance#>)
+        //Check if user location in region
+        //Check is category or subcategory in subscriptions
+        //Make cell with story
+        ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                let entry = rest.value as! NSDictionary
+                let lat = ((entry["center"] as! NSDictionary)["latitude"] as! String).toDouble()
+                let long = ((entry["center"] as! NSDictionary)["longitude"] as! String).toDouble()
+                let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                let rangeMiles = entry["range"] as! Double
+                let rangeMeters = rangeMiles * 1609.344
+                let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
+                if self.isInRegion(region: region, coordinate: self.currentLocation) {
+                    print ("YES")
+                }
             }
         }
     }
@@ -83,5 +123,26 @@ class userAuthenticatedViewController: UIViewController {
                 self.performSegue(withIdentifier: "deletedUser", sender: self)      //Send back to login screen
             }
         }
+    }
+    
+    func isInRegion (region : MKCoordinateRegion, coordinate : CLLocationCoordinate2D) -> Bool {
+        
+        let center   = region.center;
+        let northWestCorner = CLLocationCoordinate2D(latitude: center.latitude  - (region.span.latitudeDelta  / 2.0), longitude: center.longitude - (region.span.longitudeDelta / 2.0))
+        let southEastCorner = CLLocationCoordinate2D(latitude: center.latitude  + (region.span.latitudeDelta  / 2.0), longitude: center.longitude + (region.span.longitudeDelta / 2.0))
+        
+        return (
+            coordinate.latitude  >= northWestCorner.latitude &&
+                coordinate.latitude  <= southEastCorner.latitude &&
+                
+                coordinate.longitude >= northWestCorner.longitude &&
+                coordinate.longitude <= southEastCorner.longitude
+        )
+    }
+}
+
+extension String {
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
     }
 }
