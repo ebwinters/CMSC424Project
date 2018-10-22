@@ -53,7 +53,12 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                 publishingSubcategory = subcategories[0]    //Set to top item
             }
             print (publishingSubcategory)
-            return subcategories[row]
+            if subcategories[row] != "None" {
+                return subcategories[row]
+            }
+            else {
+                return ""
+            }
         }
     }
     
@@ -162,12 +167,11 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                         }
                     }
                 }
+                if innerSubcategories.contains(self.publishingSubcategory) == false && self.publishingSubcategory != "" {
+                    self.ref.child("Categories").child(self.publishingCategory).childByAutoId().setValue(self.publishingSubcategory)     //Add new subcategory under category
+                }
             }
             
-            //Add subcategory to existing category
-            if innerSubcategories.contains(publishingSubcategory) == false && publishingSubcategory != "" {
-                self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue(publishingSubcategory)     //Add new subcategory under category
-            }
         }
         
         let center = [
@@ -183,8 +187,19 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             "range": range
             ] as [String : Any]
         let postRef = self.ref.child("News").childByAutoId()
-        postRef.setValue(post)     //Add to users under UID
-        print (postRef.key)
+        postRef.setValue(post)     //Add to news
+        //Make new publishes entry under publisher with newsID: category name
+        self.ref.child("Publishes").child(publisherID).child(postRef.key!).setValue(["Category": publishingCategory])
+        //Segue
+        performSegue(withIdentifier: "publishedStory", sender: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "publishedStory") {       //User signed in successfully
+            let destinationVC = segue.destination as!   publisherAuthenticatedViewControllerViewController
+            destinationVC.hidden = true
+            destinationVC.publisherID = publisherID
+        }
     }
     
     

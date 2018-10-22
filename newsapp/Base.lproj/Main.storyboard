@@ -601,6 +601,7 @@
                         <outlet property="subcategoryPicker" destination="9lH-pH-HeV" id="AeR-9r-8Su"/>
                         <outlet property="subcategoryTextField" destination="UnW-gr-lmM" id="vBa-OF-xhN"/>
                         <outlet property="submitButton" destination="SrZ-pC-gYX" id="Beg-JH-2Oj"/>
+                        <segue destination="bss-ln-ZQA" kind="show" identifier="publishedStory" id="JGU-P7-dsG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bo6-HQ-ddP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -609,6 +610,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="JGU-P7-dsG"/>
         <segue reference="aSC-8q-mMb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,10 +13,13 @@ import FirebaseAuth
 class publisherAuthenticatedViewControllerViewController: UIViewController {
     var publisherID = ""
     var ref:DatabaseReference!
+    var hidden = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+
+        self.navigationController?.isNavigationBarHidden = hidden
 
         // Do any additional setup after loading the view.
     }
