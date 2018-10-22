@@ -18,6 +18,7 @@ class StoryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "storyCell") as! StoryTableViewCell
+        cell.configure(category: validStories[indexPath.row].category, subcategory: validStories[indexPath.row].subcategory, message: validStories[indexPath.row].message)
         return cell
     }
     

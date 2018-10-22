@@ -9,7 +9,10 @@
 import UIKit
 
 class StoryTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var messageView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +20,12 @@ class StoryTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    public func configure(category: String, subcategory: String, message: String) {
+        print (message)
+        messageView.text = message
+        categoryLabel.text = category + ", " + subcategory
     }
 
 }
