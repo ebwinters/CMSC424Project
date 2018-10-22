@@ -139,12 +139,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         }
         message = messageField.text!
         range =  Int(rangeTextField.text!)!
-        //ADD NEW CATEGORIES
-            //Get all categories
-            //Check if new one is in old ones
-            //Insert subcat into existing cat
-        //MAKE NEW NEWS STORY
-        //MAKE NEW PUBLISHES ENTRY
+        
+        //Add a new category and subcategory if needed
         if categories.contains(publishingCategory) == false {
             self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue("None")     //Add new subcategory subscription for user with userID
             
@@ -153,7 +149,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             }
         }
         if categories.contains(publishingCategory) == true {
-            //Get subcategories self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue("None")     //Add new subcategory subscription for user with userID
+            //Get subcategories for category
             var innerSubcategories = [String]()
             ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
@@ -167,6 +163,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                     }
                 }
             }
+            
+            //Add subcategory to existing category
             if innerSubcategories.contains(publishingSubcategory) == false && publishingSubcategory != "" {
                 self.ref.child("Categories").child(publishingCategory).childByAutoId().setValue(publishingSubcategory)     //Add new subcategory under category
             }
