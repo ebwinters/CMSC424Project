@@ -44,31 +44,16 @@ class userAuthenticatedViewController: UIViewController {
     var subscriptions = [String]()
     var valid = [Story]()
     
+    override func viewDidAppear(_ animated: Bool) {
+        subscriptions = []
+        valid = []
+        self.getSubscriptions()
+        self.getValidStories()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()       //Set Firebase reference to point to plist file
-        
-        ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
-            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                self.subscriptions.append(rest.value as! String)
-            }
-        }
-        ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
-            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                let entry = rest.value as! NSDictionary
-                let lat = ((entry["center"] as! NSDictionary)["latitude"] as! String).toDouble()
-                let long = ((entry["center"] as! NSDictionary)["longitude"] as! String).toDouble()
-                let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-                let rangeMiles = entry["range"] as! Double
-                let rangeMeters = rangeMiles * 1609.344
-                let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
-                if self.isInRegion(region: region, coordinate: self.currentLocation) {
-                    if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
-                        self.valid.append(Story(message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
-                    }
-                }
-            }
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -132,6 +117,33 @@ class userAuthenticatedViewController: UIViewController {
                 coordinate.longitude >= northWestCorner.longitude &&
                 coordinate.longitude <= southEastCorner.longitude
         )
+    }
+    
+    public func getValidStories() {
+        ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                let entry = rest.value as! NSDictionary
+                let lat = ((entry["center"] as! NSDictionary)["latitude"] as! String).toDouble()
+                let long = ((entry["center"] as! NSDictionary)["longitude"] as! String).toDouble()
+                let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                let rangeMiles = entry["range"] as! Double
+                let rangeMeters = rangeMiles * 1609.344
+                let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
+                if self.isInRegion(region: region, coordinate: self.currentLocation) {
+                    if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
+                        self.valid.append(Story(message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
+                    }
+                }
+            }
+        }
+    }
+    
+    public func getSubscriptions() {
+        ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                self.subscriptions.append(rest.value as! String)     //Get all current user subscriptions
+            }
+        }
     }
 }
 

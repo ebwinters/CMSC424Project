@@ -34,6 +34,7 @@ class StoryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
         
         tableView.delegate = self
         tableView.dataSource = self
