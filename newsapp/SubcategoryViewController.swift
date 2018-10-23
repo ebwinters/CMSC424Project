@@ -29,6 +29,9 @@ class SubcategoryViewController: UIViewController, UITableViewDelegate, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
         tableView.delegate = self
         tableView.dataSource = self
         

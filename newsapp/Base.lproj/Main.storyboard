@@ -552,16 +552,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="119" translatesAutoresizingMaskIntoConstraints="NO" id="EMV-zf-USk">
+                                <rect key="frame" x="136" y="318" width="103" height="328"/>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-e7-eZe">
-                                <rect key="frame" x="136" y="318" width="103" height="30"/>
+                                <rect key="frame" x="136" y="106" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Publish a Story"/>
                                 <connections>
                                     <action selector="showPublishStory:" destination="bss-ln-ZQA" eventType="touchUpInside" id="a9a-4G-yet"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDr-k0-iLm">
+                                <rect key="frame" x="159" y="255" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign out"/>
+                                <connections>
+                                    <action selector="signOut:" destination="bss-ln-ZQA" eventType="touchUpInside" id="IwV-yl-DUN"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcr-sy-s8K">
-                                <rect key="frame" x="147" y="617" width="81" height="30"/>
+                                <rect key="frame" x="147" y="404" width="81" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Delete User">
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -572,6 +583,9 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EMV-zf-USk" firstAttribute="centerX" secondItem="EQz-hZ-qZg" secondAttribute="centerX" id="VJ1-ai-5Y7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="PHg-q3-FPf"/>
                     </view>
                     <connections>
@@ -684,6 +698,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="JGU-P7-dsG"/>
-        <segue reference="KNc-43-07A"/>
+        <segue reference="aSC-8q-mMb"/>
     </inferredMetricsTieBreakers>
 </document>

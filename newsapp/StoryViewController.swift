@@ -34,6 +34,7 @@ class StoryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         tableView.reloadData()
         
         tableView.delegate = self

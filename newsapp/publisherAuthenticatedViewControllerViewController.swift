@@ -36,6 +36,12 @@ class publisherAuthenticatedViewControllerViewController: UIViewController {
         performSegue(withIdentifier: "publishStory", sender: publisherID)
     }
     
+    @IBAction func signOut(_ sender: Any) {
+        try! Auth.auth().signOut()
+        self.performSegue(withIdentifier: "deletedPublisher", sender: self)
+    }
+    
+    
     @IBAction func deletePublisher(_ sender: Any) {
         if let users = Auth.auth().currentUser {
             ref.child("Publishers").child(users.uid).observeSingleEvent(of: .value) { (snapshot) in
