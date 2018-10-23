@@ -38,7 +38,7 @@ class userAuthenticatedViewController: UIViewController {
         }
     }
     
-    var userID = ""    //Variable to ekep track of signed in user's UID
+    var userID = ""    //Variable to keep track of signed in user's UID
     var currentLocation = CLLocationCoordinate2D()
     var ref:DatabaseReference!
     var subscriptions = [String]()
@@ -49,6 +49,8 @@ class userAuthenticatedViewController: UIViewController {
         valid = []
         self.getSubscriptions()
         self.getValidStories()
+        
+        print (userID, currentLocation)
     }
     
     override func viewDidLoad() {
@@ -68,6 +70,10 @@ class userAuthenticatedViewController: UIViewController {
             destinationVC.subscriptions = self.subscriptions
             destinationVC.validStories = self.valid
         }
+        if segue.identifier == "updateLocation" {
+            let destinationVC = segue.destination as! LocationChangeViewController
+            destinationVC.userID = userID
+        }
     }
     
     /*
@@ -79,6 +85,11 @@ class userAuthenticatedViewController: UIViewController {
     
     @IBAction func getStories(_ sender: Any) {
         performSegue(withIdentifier: "showStories", sender: userID)
+    }
+    
+    
+    @IBAction func changeLocationPress(_ sender: Any) {
+        performSegue(withIdentifier: "updateLocation", sender: (Any).self)
     }
     
     

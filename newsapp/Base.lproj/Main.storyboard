@@ -332,6 +332,14 @@
                                     <action selector="deleteCurrentUser:" destination="8yV-jL-DxB" eventType="touchUpInside" id="3md-6A-TJO"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cki-Ou-uXg">
+                                <rect key="frame" x="115" y="66" width="145" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Location Preferences"/>
+                                <connections>
+                                    <action selector="changeLocationPress:" destination="8yV-jL-DxB" eventType="touchUpInside" id="rX4-PG-ZoW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="miw-Pf-39t"/>
@@ -340,11 +348,53 @@
                         <segue destination="5k5-tR-9JP" kind="show" identifier="deletedUser" id="KNc-43-07A"/>
                         <segue destination="ppS-0T-Z96" kind="show" identifier="showCategories" id="LOW-27-A9H"/>
                         <segue destination="ayC-AT-6g3" kind="show" identifier="showStories" id="wdy-PY-4t9"/>
+                        <segue destination="OC3-GG-3vK" kind="show" identifier="updateLocation" id="RuN-hY-bkX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNY-H2-69B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2594" y="781"/>
+        </scene>
+        <!--Location Change View Controller-->
+        <scene sceneID="IN7-06-Izd">
+            <objects>
+                <viewController id="OC3-GG-3vK" customClass="LocationChangeViewController" customModule="newsapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xrf-df-Jsb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kpE-r0-iFL">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDF-Fi-2CS">
+                                <rect key="frame" x="153" y="556" width="69" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Confirm">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmPress:" destination="OC3-GG-3vK" eventType="touchUpInside" id="FNd-uo-f9j"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6uW-KF-ZbU" firstAttribute="bottom" secondItem="kpE-r0-iFL" secondAttribute="bottom" id="Vzx-9f-qBh"/>
+                            <constraint firstItem="6uW-KF-ZbU" firstAttribute="trailing" secondItem="kpE-r0-iFL" secondAttribute="trailing" id="f9I-Bn-uHZ"/>
+                            <constraint firstItem="kpE-r0-iFL" firstAttribute="top" secondItem="6uW-KF-ZbU" secondAttribute="top" id="mtR-Ih-kRr"/>
+                            <constraint firstItem="kpE-r0-iFL" firstAttribute="leading" secondItem="6uW-KF-ZbU" secondAttribute="leading" id="vnb-Q3-9BG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6uW-KF-ZbU"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="kpE-r0-iFL" id="25h-Ga-jfu"/>
+                        <segue destination="8yV-jL-DxB" kind="show" identifier="updatedLocation" id="iB2-0q-1CU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xnj-26-mAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3495" y="-19"/>
         </scene>
         <!--Category View Controller-->
         <scene sceneID="rLK-EY-ZcK">
@@ -698,6 +748,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="JGU-P7-dsG"/>
-        <segue reference="aSC-8q-mMb"/>
+        <segue reference="iB2-0q-1CU"/>
+        <segue reference="KNc-43-07A"/>
     </inferredMetricsTieBreakers>
 </document>
