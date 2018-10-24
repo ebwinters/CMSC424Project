@@ -110,9 +110,11 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     var range = 0
     var message = ""
     var storyTitle = ""
+    var pubName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getPublisherName(publisherID: publisherID)
         self.navigationController?.isNavigationBarHidden = false
         //Fill categories - fill subcategories after category selected using reloadComponent
         ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
@@ -190,7 +192,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             "title": storyTitle,
             "end": dateAvailable,
             "center": center,
-            "range": range
+            "range": range,
+            "publisherName": pubName
             ] as [String : Any]
         let postRef = self.ref.child("News").childByAutoId()
         postRef.setValue(post)     //Add to news
@@ -218,6 +221,17 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
         let coordinateRegion = MKCoordinateRegion(center: coordinate,latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
+    
+    func getPublisherName(publisherID: String) {
+        var name = ""
+        ref.child("Publishers").child(publisherID).observeSingleEvent(of: .value) { snapshot in
+            let snap = snapshot.value as! NSDictionary
+            name = snap["name"] as! String
+            self.pubName = name
+        }
+    }
+    
+    
     
     /*
      Handle map tap and update center location to wherever publisher clicks on map using a gestureRecognizer
