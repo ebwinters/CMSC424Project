@@ -352,13 +352,35 @@
                                 <rect key="frame" x="10" y="302" width="355" height="355"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PEv-9x-ReA">
-                                        <rect key="frame" x="0.0" y="28" width="355" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="overviewCell" rowHeight="58" id="PEv-9x-ReA" customClass="OverviewTableViewCell" customModule="newsapp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="355" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PEv-9x-ReA" id="elN-jG-4jx">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvx-qB-VL5">
+                                                    <rect key="frame" x="15" y="3" width="325" height="36"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waB-CO-5lk">
+                                                    <rect key="frame" x="65" y="32" width="224" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="waB-CO-5lk" secondAttribute="bottom" constant="4.5" id="7QV-VT-pjQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="qvx-qB-VL5" secondAttribute="bottom" constant="21.5" id="OeZ-Rm-hN8"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="categoryLabel" destination="waB-CO-5lk" id="5bD-2Z-DzA"/>
+                                            <outlet property="titleLabel" destination="qvx-qB-VL5" id="b9u-Zi-pEU"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -375,6 +397,7 @@
                         <viewLayoutGuide key="safeArea" id="miw-Pf-39t"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="6NO-sL-uLf" id="lKu-bn-B5O"/>
                         <segue destination="5k5-tR-9JP" kind="show" identifier="deletedUser" id="KNc-43-07A"/>
                         <segue destination="ppS-0T-Z96" kind="show" identifier="showCategories" id="LOW-27-A9H"/>
                         <segue destination="ayC-AT-6g3" kind="show" identifier="showStories" id="wdy-PY-4t9"/>

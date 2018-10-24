@@ -225,5 +225,4 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     }
-
 }

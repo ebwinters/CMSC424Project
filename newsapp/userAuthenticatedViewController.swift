@@ -20,23 +20,40 @@ import FirebaseAuth
  4. Retrieve stories near user's location and relay them to the current user based on their preferences
  */
 
-class userAuthenticatedViewController: UIViewController {
+class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return valid.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "overviewCell") as! OverviewTableViewCell
+        cell.configure(title: valid[indexPath.row].title, category: valid[indexPath.row].category, subcategory: valid[indexPath.row].subcategory)
+        return cell
+    }
+    
     class Story : NSObject {
         var message: String
         var center: CLLocationCoordinate2D
         var category: String
         var subcategory: String
         var range: Double
+        var title: String
+        var pubName: String
         
         
-        init(message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double) {
+        init(title: String, pubName: String, message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double) {
             self.message = message
             self.center = center
             self.category = category
             self.subcategory = subcategory
             self.range = range
+            self.title = title
+            self.pubName = pubName
         }
     }
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     
     var userID = ""    //Variable to keep track of signed in user's UID
     var currentLocation = CLLocationCoordinate2D()
@@ -44,11 +61,16 @@ class userAuthenticatedViewController: UIViewController {
     var subscriptions = [String]()
     var valid = [Story]()
     
+    let myGroup = DispatchGroup()
+    
     override func viewDidAppear(_ animated: Bool) {
         subscriptions = []
         valid = []
         self.getSubscriptions()
         self.getValidStories()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
         
         print (userID, currentLocation)
     }
@@ -56,6 +78,8 @@ class userAuthenticatedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()       //Set Firebase reference to point to plist file
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -144,11 +168,13 @@ class userAuthenticatedViewController: UIViewController {
                 let long = ((entry["center"] as! NSDictionary)["longitude"] as! String).toDouble()
                 let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
                 let rangeMiles = entry["range"] as! Double
+                let storyTitle = entry["title"] as! String
+                let pubName = entry["publisherName"] as! String
                 let rangeMeters = rangeMiles * 1609.344
                 let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
                 if self.isInRegion(region: region, coordinate: self.currentLocation) {
                     if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
-                        self.valid.append(Story(message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
+                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
                     }
                 }
             }
