@@ -66,8 +66,27 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
     override func viewDidAppear(_ animated: Bool) {
         subscriptions = []
         valid = []
-        self.getSubscriptions()
-        self.getValidStories()
+        myGroup.enter()
+        let temp_val = getSubscriptions (completion: {lst in
+            DispatchQueue.main.async {
+                self.subscriptions = lst
+                //CHECK SUBSCRIPTIONS HERE
+            }
+            self.myGroup.leave()
+        })
+        myGroup.notify(queue: .main) {
+            self.myGroup.enter()
+            let temp_val = self.getValidStories (completion: {lst in
+                DispatchQueue.main.async {
+                    self.valid = lst
+                    //CHECK VALID HERE
+                }
+                self.myGroup.leave()
+                self.myGroup.notify(queue: .main) {
+                    self.tableView.reloadData()
+                }
+            })
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
@@ -160,7 +179,28 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
         )
     }
     
-    public func getValidStories() {
+//    public func getValidStories() {
+//        ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
+//            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+//                let entry = rest.value as! NSDictionary
+//                let lat = ((entry["center"] as! NSDictionary)["latitude"] as! String).toDouble()
+//                let long = ((entry["center"] as! NSDictionary)["longitude"] as! String).toDouble()
+//                let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+//                let rangeMiles = entry["range"] as! Double
+//                let storyTitle = entry["title"] as! String
+//                let pubName = entry["publisherName"] as! String
+//                let rangeMeters = rangeMiles * 1609.344
+//                let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
+//                if self.isInRegion(region: region, coordinate: self.currentLocation) {
+//                    if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
+//                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    func getValidStories(completion: @escaping ([Story]) -> ()) {
         ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 let entry = rest.value as! NSDictionary
@@ -178,14 +218,24 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
                     }
                 }
             }
+            completion(self.valid)
         }
     }
     
-    public func getSubscriptions() {
+//    public func getSubscriptions() {
+//        ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+//            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+//                self.subscriptions.append(rest.value as! String)     //Get all current user subscriptions
+//            }
+//        }
+//    }
+    
+    func getSubscriptions(completion: @escaping ([String]) -> ()) {
         ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
                 self.subscriptions.append(rest.value as! String)     //Get all current user subscriptions
             }
+            completion(self.subscriptions)
         }
     }
 }
