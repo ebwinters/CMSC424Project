@@ -96,6 +96,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @IBOutlet weak var rangeTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var messageField: UITextView!
+    @IBOutlet weak var titleField: UITextField!
+    
     
     var categories = ["None selected"]
     var subcategories = [String]()
@@ -107,6 +109,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     var dateAvailable = ""
     var range = 0
     var message = ""
+    var storyTitle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +147,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             publishingSubcategory = subcategoryTextField.text!
         }
         message = messageField.text!
+        storyTitle = titleField.text!
         range =  Int(rangeTextField.text!)!
         
         //Add a new category and subcategory if needed
@@ -183,6 +187,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             "category": publishingCategory,
             "subcategory": publishingSubcategory,
             "message": message,
+            "title": storyTitle,
             "end": dateAvailable,
             "center": center,
             "range": range
