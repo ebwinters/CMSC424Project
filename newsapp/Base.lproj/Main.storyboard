@@ -306,42 +306,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kG4-ls-dnL">
-                                <rect key="frame" x="101" y="197" width="173" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Subscription Preferences"/>
-                                <connections>
-                                    <action selector="subscriptionPreferences:" destination="8yV-jL-DxB" eventType="touchUpInside" id="jDc-kd-h2Q"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZd-X7-t6q">
-                                <rect key="frame" x="149" y="400" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Stories"/>
-                                <connections>
-                                    <action selector="getStories:" destination="8yV-jL-DxB" eventType="touchUpInside" id="xAy-kt-9fe"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4k-Nw-6QJ">
-                                <rect key="frame" x="147" y="617" width="81" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Delete User">
-                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteCurrentUser:" destination="8yV-jL-DxB" eventType="touchUpInside" id="3md-6A-TJO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cki-Ou-uXg">
-                                <rect key="frame" x="115" y="66" width="145" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Location Preferences"/>
-                                <connections>
-                                    <action selector="changeLocationPress:" destination="8yV-jL-DxB" eventType="touchUpInside" id="rX4-PG-ZoW"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="P2b-wk-nYj">
+                                <rect key="frame" x="101" y="42" width="173" height="210"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cki-Ou-uXg">
+                                        <rect key="frame" x="14" y="0.0" width="145" height="30"/>
+                                        <state key="normal" title="Location Preferences"/>
+                                        <connections>
+                                            <action selector="changeLocationPress:" destination="8yV-jL-DxB" eventType="touchUpInside" id="rX4-PG-ZoW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kG4-ls-dnL">
+                                        <rect key="frame" x="0.0" y="45" width="173" height="30"/>
+                                        <state key="normal" title="Subscription Preferences"/>
+                                        <connections>
+                                            <action selector="subscriptionPreferences:" destination="8yV-jL-DxB" eventType="touchUpInside" id="jDc-kd-h2Q"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSJ-Cr-amJ">
+                                        <rect key="frame" x="58" y="90" width="57" height="30"/>
+                                        <state key="normal" title="Sign out"/>
+                                        <connections>
+                                            <action selector="signOut:" destination="8yV-jL-DxB" eventType="touchUpInside" id="acf-VC-qkx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4k-Nw-6QJ">
+                                        <rect key="frame" x="46" y="135" width="81" height="30"/>
+                                        <state key="normal" title="Delete User">
+                                            <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteCurrentUser:" destination="8yV-jL-DxB" eventType="touchUpInside" id="3md-6A-TJO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZd-X7-t6q">
+                                        <rect key="frame" x="48" y="180" width="77" height="30"/>
+                                        <state key="normal" title="Get Stories"/>
+                                        <connections>
+                                            <action selector="getStories:" destination="8yV-jL-DxB" eventType="touchUpInside" id="xAy-kt-9fe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P2b-wk-nYj" firstAttribute="top" secondItem="miw-Pf-39t" secondAttribute="top" constant="22" id="NnJ-rs-ivY"/>
+                            <constraint firstItem="P2b-wk-nYj" firstAttribute="centerX" secondItem="s9w-Ys-KtP" secondAttribute="centerX" id="hAd-WI-nKi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="miw-Pf-39t"/>
                     </view>
                     <connections>
@@ -748,7 +760,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="JGU-P7-dsG"/>
-        <segue reference="iB2-0q-1CU"/>
+        <segue reference="QCO-1r-bkE"/>
         <segue reference="KNc-43-07A"/>
     </inferredMetricsTieBreakers>
 </document>

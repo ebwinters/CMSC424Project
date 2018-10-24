@@ -28,6 +28,7 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         mapView.delegate = self
         centerMapOnLocation()       //Center map on College Park
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))

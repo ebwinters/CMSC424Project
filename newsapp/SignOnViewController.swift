@@ -38,6 +38,7 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         ref = Database.database().reference()       //Add Firebase DB reference
         
         self.locationManager.requestWhenInUseAuthorization()

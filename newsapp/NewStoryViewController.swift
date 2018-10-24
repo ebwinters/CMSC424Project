@@ -110,6 +110,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         //Fill categories - fill subcategories after category selected using reloadComponent
         ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {

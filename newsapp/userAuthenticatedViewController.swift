@@ -87,6 +87,12 @@ class userAuthenticatedViewController: UIViewController {
         performSegue(withIdentifier: "showStories", sender: userID)
     }
     
+    @IBAction func signOut(_ sender: Any) {
+        try! Auth.auth().signOut()
+        self.performSegue(withIdentifier: "deletedUser", sender: self)
+    }
+    
+    
     
     @IBAction func changeLocationPress(_ sender: Any) {
         performSegue(withIdentifier: "updateLocation", sender: (Any).self)

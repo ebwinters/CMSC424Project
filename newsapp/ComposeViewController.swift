@@ -17,6 +17,7 @@ class ComposeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         ref = Database.database().reference()
 
         // Do any additional setup after loading the view.
