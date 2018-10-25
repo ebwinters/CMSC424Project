@@ -9,6 +9,10 @@
 import UIKit
 import MapKit
 
+protocol HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
 class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     class MapPin : NSObject, MKAnnotation {
         var coordinate: CLLocationCoordinate2D
@@ -26,6 +30,10 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
     var newLocation = CLLocationCoordinate2D()
     var userID = ""
     
+    //Search Bar
+    var resultSearchController:UISearchController? = nil
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
@@ -35,7 +43,19 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
 
-        // Do any additional setup after loading the view.
+        //Search Table
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable as! UISearchResultsUpdating
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = resultSearchController?.searchBar
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        locationSearchTable.mapView = mapView
+        locationSearchTable.handleMapSearchDelegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,5 +93,13 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
     @IBAction func confirmPress(_ sender: Any) {
         performSegue(withIdentifier: "updatedLocation", sender: (Any).self)
     }
-    
+}
+
+extension LocationChangeViewController: HandleMapSearch {
+    func dropPinZoomIn(placemark: MKPlacemark) {
+        let selectedPin = placemark
+        let annotation = MKPointAnnotation()
+        newLocation = placemark.coordinate
+        performSegue(withIdentifier: "updatedLocation", sender: (Any).self)
+    }
 }
