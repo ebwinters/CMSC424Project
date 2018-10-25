@@ -36,6 +36,10 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showFullStory", sender: valid[indexPath.row])
+    }
+    
     class Story : NSObject {
         var message: String
         var center: CLLocationCoordinate2D
@@ -44,9 +48,10 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
         var range: Double
         var title: String
         var pubName: String
+        var imageURL: String
         
         
-        init(title: String, pubName: String, message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double) {
+        init(title: String, pubName: String, message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double, imageURL: String) {
             self.message = message
             self.center = center
             self.category = category
@@ -54,6 +59,7 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
             self.range = range
             self.title = title
             self.pubName = pubName
+            self.imageURL = imageURL
         }
     }
     
@@ -121,6 +127,12 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
         if segue.identifier == "updateLocation" {
             let destinationVC = segue.destination as! LocationChangeViewController
             destinationVC.userID = userID
+        }
+        if segue.identifier == "showFullStory" {
+            let destinationVC = segue.destination as! FullStoryViewController
+            destinationVC.userID = userID
+            destinationVC.currentLocation = currentLocation
+            destinationVC.story = sender as! Story
         }
     }
     
@@ -214,12 +226,13 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
                 let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
                 let rangeMiles = entry["range"] as! Double
                 let storyTitle = entry["title"] as! String
+                let imageURL = entry["imageURL"] as! String
                 let pubName = entry["publisherName"] as! String
                 let rangeMeters = rangeMiles * 1609.344
                 let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
                 if self.isInRegion(region: region, coordinate: self.currentLocation) {
                     if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
-                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
+                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles, imageURL: imageURL))
                     }
                 }
             }
