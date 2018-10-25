@@ -9,8 +9,9 @@
 import UIKit
 import MapKit
 import Firebase
+import FirebaseStorage
 
-class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /*
      Create a pin to show publisher where their center is on map
@@ -97,6 +98,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var messageField: UITextView!
     @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var imageButton: UIButton!
+    
     
     
     var categories = ["None selected"]
@@ -111,11 +114,31 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     var message = ""
     var storyTitle = ""
     var pubName = ""
+    var image = UIImage()
+    
+    @objc func handleUploadImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //info is a dictionary
+        if let originalImage = info[.originalImage] {
+            image = originalImage as! UIImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getPublisherName(publisherID: publisherID)
         self.navigationController?.isNavigationBarHidden = false
+        imageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadImage)))
         //Fill categories - fill subcategories after category selected using reloadComponent
         ref.child("Categories").observeSingleEvent(of: .value) { snapshot in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
@@ -180,6 +203,22 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             }
             
         }
+        //Store image
+        let data = Data()
+        let storageRef = Storage.storage().reference().child(storyTitle+publisherID+".jpg")
+        let uploadData = image.jpegData(compressionQuality: 1)!
+        print (image.size)
+        let uploadTask = storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+            if error != nil {
+                print (error)
+                return
+            }
+            guard let metadata = metadata else {
+                return
+            }
+        }
+
+        
         
         let center = [
             "latitude": publishingCenterCoordinate.0,

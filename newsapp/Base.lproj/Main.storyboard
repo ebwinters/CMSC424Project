@@ -782,6 +782,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2l7-vf-BFC">
+                                <rect key="frame" x="285" y="100" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Image"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Aj3-Pl-Ld9"/>
@@ -790,6 +795,7 @@
                         <outlet property="categoryPicker" destination="piB-rr-8Zo" id="5Je-2e-g0P"/>
                         <outlet property="categoryTextField" destination="zZT-er-ewi" id="mRx-fT-2sF"/>
                         <outlet property="datePicker" destination="d4H-Zh-nSU" id="M5K-Np-88v"/>
+                        <outlet property="imageButton" destination="2l7-vf-BFC" id="11m-k7-lZw"/>
                         <outlet property="mapView" destination="Nlu-eH-d1u" id="ula-4m-7FY"/>
                         <outlet property="messageField" destination="vx7-Tl-hOr" id="udc-Wa-06o"/>
                         <outlet property="rangeTextField" destination="xiP-Wx-ziN" id="6lP-ev-Pyc"/>
