@@ -115,6 +115,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     var storyTitle = ""
     var pubName = ""
     var image = UIImage()
+    var downloadURL = ""
     
     @objc func handleUploadImage() {
         let picker = UIImagePickerController()
@@ -215,6 +216,13 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
             }
             guard let metadata = metadata else {
                 return
+            }
+            storageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                self.downloadURL = downloadURL
             }
         }
 
