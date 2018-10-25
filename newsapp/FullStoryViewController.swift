@@ -24,6 +24,15 @@ class FullStoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
+        
+        titleLabel.text = story.title
+        nameLabel.text = "Written by: \n" + story.pubName
+        nameLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        nameLabel.numberOfLines = 0;
+        nameLabel.sizeToFit()
+        categoryLabel.text = story.category + ", " + story.subcategory
+        messageView.text = story.message
         let url = URL(string: story.imageURL)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
