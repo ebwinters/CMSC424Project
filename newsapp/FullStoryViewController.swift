@@ -10,6 +10,13 @@ import UIKit
 import MapKit
 
 class FullStoryViewController: UIViewController {
+    //Outlets
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var messageView: UITextView!
+    
     
     var userID = ""
     var currentLocation = CLLocationCoordinate2D()
@@ -17,6 +24,18 @@ class FullStoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let url = URL(string: story.imageURL)
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil {
+                print (error)
+                return
+            }
+            let myGroup = DispatchGroup()
+            myGroup.enter()
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data!)
+            }
+        }.resume()
 
         // Do any additional setup after loading the view.
     }
