@@ -49,9 +49,10 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
         var title: String
         var pubName: String
         var imageURL: String
+        var images: NSDictionary
         
         
-        init(title: String, pubName: String, message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double, imageURL: String) {
+        init(title: String, pubName: String, message: String, center: CLLocationCoordinate2D, category: String, subcategory: String, range: Double, imageURL: String, images: NSDictionary) {
             self.message = message
             self.center = center
             self.category = category
@@ -60,6 +61,7 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
             self.title = title
             self.pubName = pubName
             self.imageURL = imageURL
+            self.images = images
         }
     }
     
@@ -196,27 +198,6 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
         )
     }
     
-//    public func getValidStories() {
-//        ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
-//            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-//                let entry = rest.value as! NSDictionary
-//                let lat = ((entry["center"] as! NSDictionary)["latitude"] as! String).toDouble()
-//                let long = ((entry["center"] as! NSDictionary)["longitude"] as! String).toDouble()
-//                let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-//                let rangeMiles = entry["range"] as! Double
-//                let storyTitle = entry["title"] as! String
-//                let pubName = entry["publisherName"] as! String
-//                let rangeMeters = rangeMiles * 1609.344
-//                let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
-//                if self.isInRegion(region: region, coordinate: self.currentLocation) {
-//                    if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
-//                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles))
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     func getValidStories(completion: @escaping ([Story]) -> ()) {
         ref.child("News").observeSingleEvent(of: .value) { (snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
@@ -226,27 +207,20 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
                 let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
                 let rangeMiles = entry["range"] as! Double
                 let storyTitle = entry["title"] as! String
-                let imageURL = entry["imageURL"] as! String
+                let images = entry["images"] as! NSDictionary
+                let imageURL = (entry["images"] as! NSDictionary).allValues.first! as! String
                 let pubName = entry["publisherName"] as! String
                 let rangeMeters = rangeMiles * 1609.344
                 let region = MKCoordinateRegion(center: center, latitudinalMeters: rangeMeters, longitudinalMeters: rangeMeters)
                 if self.isInRegion(region: region, coordinate: self.currentLocation) {
                     if self.subscriptions.contains(entry["category"] as! String) || self.subscriptions.contains(entry["subcategory"] as! String) {
-                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles, imageURL: imageURL))
+                        self.valid.append(Story(title: storyTitle, pubName: pubName, message: entry["message"] as! String, center: center, category: entry["category"] as! String, subcategory: entry["subcategory"] as! String, range: rangeMiles, imageURL: imageURL, images: images))
                     }
                 }
             }
             completion(self.valid)
         }
     }
-    
-//    public func getSubscriptions() {
-//        ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in
-//            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-//                self.subscriptions.append(rest.value as! String)     //Get all current user subscriptions
-//            }
-//        }
-//    }
     
     func getSubscriptions(completion: @escaping ([String]) -> ()) {
         ref.child("Subscribes").child(userID).observeSingleEvent(of: .value) { (snapshot) in

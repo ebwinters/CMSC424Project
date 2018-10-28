@@ -20,7 +20,7 @@ class FullStoryViewController: UIViewController {
     
     var userID = ""
     var currentLocation = CLLocationCoordinate2D()
-    var story = userAuthenticatedViewController.Story(title: "", pubName: "", message: "", center: CLLocationCoordinate2D(), category: "", subcategory: "", range: 0.0, imageURL: "")
+    var story = userAuthenticatedViewController.Story(title: "", pubName: "", message: "", center: CLLocationCoordinate2D(), category: "", subcategory: "", range: 0.0, imageURL: "", images: NSDictionary())
 
     override func viewDidLoad() {
         super.viewDidLoad()
