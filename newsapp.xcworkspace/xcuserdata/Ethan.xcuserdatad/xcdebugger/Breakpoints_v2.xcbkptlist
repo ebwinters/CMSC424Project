@@ -280,7 +280,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/userAuthenticatedViewController.swift"
-            timestampString = "562191629.282073"
+            timestampString = "562457344.000397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
@@ -296,7 +296,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/LocationChangeViewController.swift"
-            timestampString = "562191629.282146"
+            timestampString = "562457344.000623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
@@ -312,7 +312,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/userAuthenticatedViewController.swift"
-            timestampString = "562191629.282526"
+            timestampString = "562457344.00158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -344,7 +344,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/userAuthenticatedViewController.swift"
-            timestampString = "562191629.2825969"
+            timestampString = "562457344.001788"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
@@ -360,7 +360,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/userAuthenticatedViewController.swift"
-            timestampString = "562191629.282645"
+            timestampString = "562457344.001914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -376,7 +376,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newsapp/userAuthenticatedViewController.swift"
-            timestampString = "562191629.282689"
+            timestampString = "562457344.002004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -398,22 +398,6 @@
             startingLineNumber = "248"
             endingLineNumber = "248"
             landmarkName = "submitStory(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newsapp/LocationChangeViewController.swift"
-            timestampString = "562191629.2827491"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "dropPinZoomIn(placemark:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
