@@ -227,6 +227,11 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                     "latitude": self.publishingCenterCoordinate.0,
                     "longitude": self.publishingCenterCoordinate.1
                 ]
+                let postRef = self.ref.child("News").childByAutoId()
+                let imageAutoKey = self.ref.child("News").child(postRef.key!).childByAutoId()
+                let images = [
+                    imageAutoKey.key: tempDownloadURL.absoluteString
+                ]
                 let post = [
                     "category": self.publishingCategory,
                     "subcategory": self.publishingSubcategory,
@@ -236,9 +241,8 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                     "center": center,
                     "range": self.range,
                     "publisherName": self.pubName,
-                    "imageURL": tempDownloadURL.absoluteString
+                    "images": images
                     ] as [String : Any]
-                let postRef = self.ref.child("News").childByAutoId()
                 postRef.setValue(post)     //Add to news
                 //Make new publishes entry under publisher with newsID: category name
                 self.ref.child("Publishes").child(self.publisherID).child(postRef.key!).setValue(["Category": self.publishingCategory])
@@ -246,30 +250,6 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
                 self.performSegue(withIdentifier: "publishedStory", sender: true)
             }
         }
-
-        
-        
-//        let center = [
-//            "latitude": publishingCenterCoordinate.0,
-//            "longitude": publishingCenterCoordinate.1
-//        ]
-//        let post = [
-//            "category": publishingCategory,
-//            "subcategory": publishingSubcategory,
-//            "message": message,
-//            "title": storyTitle,
-//            "end": dateAvailable,
-//            "center": center,
-//            "range": range,
-//            "publisherName": pubName,
-//            "imageURL": downloadURL
-//            ] as [String : Any]
-//        let postRef = self.ref.child("News").childByAutoId()
-//        postRef.setValue(post)     //Add to news
-//        //Make new publishes entry under publisher with newsID: category name
-//        self.ref.child("Publishes").child(publisherID).child(postRef.key!).setValue(["Category": publishingCategory])
-//        //Segue
-//        performSegue(withIdentifier: "publishedStory", sender: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
