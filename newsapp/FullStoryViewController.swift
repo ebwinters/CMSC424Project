@@ -21,9 +21,34 @@ class FullStoryViewController: UIViewController {
     var userID = ""
     var currentLocation = CLLocationCoordinate2D()
     var story = userAuthenticatedViewController.Story(title: "", pubName: "", message: "", center: CLLocationCoordinate2D(), category: "", subcategory: "", range: 0.0, imageURL: "", images: NSDictionary())
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        performSegue(withIdentifier: "showImages", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showImages") {
+            let destinationVC = segue.destination as! ImageCollectionViewController
+            var imageDictionary = [String:String]()
+            for (index, image) in story.images.enumerated() {
+                var stringValue = "\(index)"
+                imageDictionary[stringValue] = image.value as! String
+            }
+            
+            destinationVC.images = imageDictionary as NSDictionary
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set up imageView gesture handler
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+        
         self.navigationController?.isNavigationBarHidden = false
         
         titleLabel.text = story.title
