@@ -32,7 +32,7 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "overviewCell") as! OverviewTableViewCell
-        cell.configure(title: valid[indexPath.row].title, category: valid[indexPath.row].category, subcategory: valid[indexPath.row].subcategory)
+        cell.configure(title: valid[indexPath.row].title, category: valid[indexPath.row].category, subcategory: valid[indexPath.row].subcategory, thumbnailLink: valid[indexPath.row].imageURL)
         return cell
     }
     

@@ -33,7 +33,7 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
             DispatchQueue.main.async {
                 cell.configure(data: data!)
             }
-            }.resume()
+        }.resume()
         return cell
     }
     
