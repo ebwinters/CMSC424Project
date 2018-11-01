@@ -13,7 +13,13 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
+/*
+ View controller where user changes location preferences
+ */
 class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+    /*
+     Inner class for a custom map pin, to be dropped when user selects a spot on the map
+     */
     class MapPin : NSObject, MKAnnotation {
         var coordinate: CLLocationCoordinate2D
         var title: String?
@@ -32,7 +38,6 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
     
     //Search Bar
     var resultSearchController:UISearchController? = nil
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +46,7 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
         centerMapOnLocation()       //Center map on College Park
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         gestureRecognizer.delegate = self
-        mapView.addGestureRecognizer(gestureRecognizer)
+        mapView.addGestureRecognizer(gestureRecognizer)     //When user taps map to change location
 
         //Search Table
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
@@ -61,7 +66,7 @@ class LocationChangeViewController: UIViewController, MKMapViewDelegate, UIGestu
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "updatedLocation" {
             let destinationVC = segue.destination as! userAuthenticatedViewController
-            destinationVC.currentLocation = newLocation
+            destinationVC.currentLocation = newLocation     //Send the new location back
             destinationVC.userID = userID
         }
     }

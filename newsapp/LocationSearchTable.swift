@@ -1,6 +1,9 @@
 import UIKit
 import MapKit
 
+/*
+ Class for a search bar to look up addresses
+ */
 class LocationSearchTable : UITableViewController {
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil

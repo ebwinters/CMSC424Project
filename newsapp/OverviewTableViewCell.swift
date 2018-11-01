@@ -8,6 +8,9 @@
 
 import UIKit
 
+/*
+ The table cell displyed on the user dash with the story title, categories, and thumbnail
+ */
 class OverviewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -16,19 +19,18 @@ class OverviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     public func configure(title: String, category: String, subcategory: String, thumbnailLink: String) {
+        //Set label and cetegory
         titleLabel.text = title
         categoryLabel.text = category + ", " + subcategory
         let url = URL(string: thumbnailLink)
+        //Asyncronously get the thumbnail url and update the actual thumbnail
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print (error)

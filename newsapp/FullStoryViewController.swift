@@ -9,6 +9,9 @@
 import UIKit
 import MapKit
 
+/*
+ Controller to present a story to the user
+ */
 class FullStoryViewController: UIViewController {
     //Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,8 +23,11 @@ class FullStoryViewController: UIViewController {
     
     var userID = ""
     var currentLocation = CLLocationCoordinate2D()
-    var story = userAuthenticatedViewController.Story(title: "", pubName: "", message: "", center: CLLocationCoordinate2D(), category: "", subcategory: "", range: 0.0, imageURL: "", images: NSDictionary())
+    var story = userAuthenticatedViewController.Story(title: "", pubName: "", message: "", center: CLLocationCoordinate2D(), category: "", subcategory: "", range: 0.0, imageURL: "", images: NSDictionary())   //Holds data on story we are trying to present
     
+    /*
+     When image tapped, take the user to collectionView of images
+     */
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -37,7 +43,7 @@ class FullStoryViewController: UIViewController {
                 imageDictionary[stringValue] = image.value as! String
             }
             
-            destinationVC.images = imageDictionary as NSDictionary
+            destinationVC.images = imageDictionary as NSDictionary      //Send indexed dict of urls
         }
     }
 
@@ -51,6 +57,7 @@ class FullStoryViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         
+        //Set labels correctly for story title, text, etc
         titleLabel.text = story.title
         nameLabel.text = "Written by: \n" + story.pubName
         nameLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -59,6 +66,7 @@ class FullStoryViewController: UIViewController {
         categoryLabel.text = story.category + ", " + story.subcategory
         messageView.text = story.message
         let url = URL(string: story.imageURL)
+        //Asyncronously get the image url and update the imageView
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print (error)
@@ -70,19 +78,5 @@ class FullStoryViewController: UIViewController {
                 self.imageView.image = UIImage(data: data!)
             }
         }.resume()
-
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

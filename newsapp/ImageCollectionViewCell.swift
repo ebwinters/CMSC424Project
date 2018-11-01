@@ -11,6 +11,9 @@ import UIKit
 class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
+    /*
+     Configure a cell with image data
+     */
     public func configure(data: Data) {
         self.imageView.image = UIImage(data: data)
     }
