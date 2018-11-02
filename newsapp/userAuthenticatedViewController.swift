@@ -79,11 +79,11 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
     override func viewDidAppear(_ animated: Bool) {
         subscriptions = []
         valid = []
+        //Load table view with correct stories and sub titles, checking subscriptions and range as well
         myGroup.enter()
         let temp_val = getSubscriptions (completion: {lst in
             DispatchQueue.main.async {
                 self.subscriptions = lst
-                //CHECK SUBSCRIPTIONS HERE
             }
             self.myGroup.leave()
         })
@@ -92,7 +92,6 @@ class userAuthenticatedViewController: UIViewController, UITableViewDelegate, UI
             let temp_val = self.getValidStories (completion: {lst in
                 DispatchQueue.main.async {
                     self.valid = lst
-                    //CHECK VALID HERE
                 }
                 self.myGroup.leave()
                 self.myGroup.notify(queue: .main) {
