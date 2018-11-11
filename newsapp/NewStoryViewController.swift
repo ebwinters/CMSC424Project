@@ -297,8 +297,9 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     
     @objc func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        dateFormatter.timeStyle = DateFormatter.Style.short
+//        dateFormatter.dateStyle = DateFormatter.Style.short
+//        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = "MM/dd/yyyy, HH:mm"
         dateAvailable = dateFormatter.string(from: sender.date)
     }
 }

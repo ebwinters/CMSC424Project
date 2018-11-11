@@ -267,7 +267,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QbA-RC-fRQ">
-                                                    <rect key="frame" x="297" y="20" width="48" height="44"/>
+                                                    <rect key="frame" x="15" y="11" width="48" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -869,8 +869,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="RuN-hY-bkX"/>
         <segue reference="JGU-P7-dsG"/>
         <segue reference="iB2-0q-1CU"/>
-        <segue reference="aSC-8q-mMb"/>
+        <segue reference="KNc-43-07A"/>
     </inferredMetricsTieBreakers>
 </document>
