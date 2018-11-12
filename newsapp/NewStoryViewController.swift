@@ -298,6 +298,7 @@ class NewStoryViewController: UIViewController, MKMapViewDelegate, UIGestureReco
     @objc func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy, HH:mm"
-        dateAvailable = dateFormatter.string(from: sender.date)
+        let timeInterval = sender.date.timeIntervalSince1970
+        dateAvailable = String(sender.date.timeIntervalSince1970)
     }
 }
