@@ -36,20 +36,6 @@ class SignOnViewController: UIViewController, CLLocationManagerDelegate {
     
     var ref:DatabaseReference!
     
-    override func viewDidAppear(_ animated: Bool) {
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            for child in snapshot.children {
-                let snap = child as! DataSnapshot
-                let key = snap.key
-                if key == "door" {
-                    let value = snap.value as! String
-                    if value == "on" {
-                        assert(1 == 2)
-                    }
-                }
-            }
-        })
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
